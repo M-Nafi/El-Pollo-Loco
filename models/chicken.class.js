@@ -13,10 +13,13 @@ class Chicken extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);      
         this.x = 300 + Math.random() * 500;  // starten von links 300 px bis max 500 dazwischen zufällige zahl
         // bei 720px breite. später entsprechend anpassen !!!
+        this.speed = 0.15 + Math.random() * 0.35;
         this.animate();
     }
 
     animate() {
+        this.moveLeft();
+
         setInterval(() => {
           let i = this.currentImage % this.IMAGES_WALKING.length; // i = ist aufgrund der modulo (&) die reihenfolge von images walking in der unendlich schleife
           let path = this.IMAGES_WALKING[i];
