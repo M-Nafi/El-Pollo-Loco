@@ -4,7 +4,8 @@ class MovableObject {
     img;
     height = 280;
     width = 100;
-    imageCache = [];
+    imageCache = {};
+    currentImage = 0;
 
     loadImage(path) {
         this.img = new Image(); // ist das gleiche wie document.getElementById('image')...
