@@ -22,7 +22,7 @@ window.addEventListener("keydown", (e) => {
     // if(e.keyCode == ) {
     //     keyboard. = true;
     // }
-  console.log(e);
+//   console.log(e);
 });
 
 
@@ -39,5 +39,5 @@ window.addEventListener("keyup", (e) => {
     // if(e.keyCode == ) {
     //     keyboard. = false;
     // }
-  console.log(e);
+//   console.log(e);
 });
