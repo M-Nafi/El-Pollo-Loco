@@ -1,23 +1,21 @@
 class World {
   character = new Character();
   enemies = [
-    new Chicken(), 
-    new Chicken(), 
+    new Chicken(),
+    new Chicken(),
     new Chicken(),
     new smallChicken(),
     new smallChicken(),
     new smallChicken(),
     new smallChicken(),
-    new smallChicken()
+    new smallChicken(),
   ];
-  clouds = [
-    new Cloud()
-  ];
+  clouds = [new Cloud()];
   backgroundObjects = [
-    new BackgroundObject('img/5_background/layers/air.png', 0),
-    new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0),
-    new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0),
-    new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0)
+    new BackgroundObject("img/5_background/layers/air.png", 0),
+    new BackgroundObject("img/5_background/layers/3_third_layer/1.png", 0),
+    new BackgroundObject("img/5_background/layers/2_second_layer/1.png", 0),
+    new BackgroundObject("img/5_background/layers/1_first_layer/1.png", 0),
   ];
   canvas;
   ctx;
@@ -40,9 +38,8 @@ class World {
     // die reihenfolge hier bestimmt auch was im vordergrund ist und was nicht. daher achtung an dieser stelle
     this.addObjectsToMap(this.backgroundObjects);
     this.addObjectsToMap(this.clouds);
-    this.addToMap(this.character);    
+    this.addToMap(this.character);
     this.addObjectsToMap(this.enemies);
-    
 
     // draw() wird immer wieder aufgerufen
     let self = this;
@@ -52,12 +49,24 @@ class World {
   }
 
   addObjectsToMap(objects) {
-    objects.forEach(o => {
+    objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
   addToMap(mo) {
+    if (mo.otherDirection) {
+      // erstmal checken ob character eine andere ricvhtung hat
+      this.ctx.save(); // wenn ja speichern vom aktuellen kontext
+      this.ctx.translate(mo.width, 0); // wie soll das bild eingefügt werden...
+      this.ctx.scale(-1, 1); //...gespiegelt einfügen
+      mo.x = mo.x * -1;
+    }
+
     this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+    if (mo.otherDirection) {
+      mo.x = mo.x * -1;
+      this.ctx.restore(); // wieder rückgängig machen der spiegelung bei rechts laufen
+    }
   }
 }
