@@ -10,6 +10,7 @@ class Character extends MovableObject {
     'img/2_character_pepe/2_walk/W-26.png',
   ];
   world;
+  walking_sound = new Audio('audio/running.mp3');
 
   constructor() {
     super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
@@ -19,26 +20,25 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
+      this.walking_sound.pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.x += this.speed;
         this.otherDirection = false;
+        this.walking_sound.play();
       }
 
       if (this.world.keyboard.LEFT && this.x > -500) {
         this.x -= this.speed;
         this.otherDirection = true;
+        this.walking_sound.play();
       }
       this.world.camera_x = -this.x + 75; 
     }, 1000 / 60);
 
     setInterval(() => {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        //walk animation
-        let i = this.currentImage % this.IMAGES_WALKING.length; // i = ist aufgrund der modulo (& bzw. ist der rest...) die reihenfolge von images walking in der unendlich schleife
-        // praktisch sieht das so aus: i = 0, 1, 2, 3, 4, 5 und dann nicht 6 sondern wieder von vorne 0, 1, 2 usw...
-        let path = this.IMAGES_WALKING[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+        //walk animation        
+       this.playAnimation(this.IMAGES_WALKING);
       }
     }, 50); // 1000
   }

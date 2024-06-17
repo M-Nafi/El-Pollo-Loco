@@ -26,6 +26,14 @@ class MovableObject {
         });
     }
 
+    playAnimation(images) {
+        let i = this.currentImage % this.IMAGES_WALKING.length; // i = ist aufgrund der modulo (& bzw. ist der rest...) die reihenfolge von images walking in der unendlich schleife
+        // praktisch sieht das so aus: i = 0, 1, 2, 3, 4, 5 und dann nicht 6 sondern wieder von vorne 0, 1, 2 usw...
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+
     moveRight() {
         console.log('Moving right');
     }

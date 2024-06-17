@@ -21,10 +21,7 @@ class smallChicken extends MovableObject {
         this.moveLeft();
 
         setInterval(() => {
-          let i = this.currentImage % this.IMAGES_WALKING.length; // i = ist aufgrund der modulo (&) die reihenfolge von images walking in der unendlich schleife
-          let path = this.IMAGES_WALKING[i];
-          this.img = this.imageCache[path]; 
-          this.currentImage++;
+          this.playAnimation(this.IMAGES_WALKING);
         }, 150);  // geschwindigkeit der chicken später entsprechend anpassen
        
       }
