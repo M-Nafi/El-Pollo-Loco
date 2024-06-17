@@ -1,5 +1,5 @@
 class smallChicken extends MovableObject {
-    y = 380;     // hiermit wird horizontale posiiton festgelegt, wo die chickens laufen
+    y = 375;     // hiermit wird horizontale posiiton festgelegt, wo die chickens laufen
     height = 40;  // hiermit wird die höhe der chickens festfelegt
     width = 45;
     IMAGES_WALKING = [
