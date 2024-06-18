@@ -51,12 +51,10 @@ class MovableObject {
 
   moveRight() {
     this.x += this.speed;
-   
   }
 
   moveLeft() {
     this.x -= this.speed; // statt this speed kann man auch 0.15 reinschreiben.
-  
   }
 
   jump() {
