@@ -1,6 +1,6 @@
 class World {
   character = new Character();
-  level = level1;   
+  level = level1;
   canvas;
   ctx;
   keyboard;
@@ -20,7 +20,7 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // hiermit wird das vorher eingefügte bild gelöscht, wichtig bei bewegungen
-    
+
     this.ctx.translate(this.camera_x, 0);
 
     // die reihenfolge hier bestimmt auch was im vordergrund ist und was nicht. daher achtung an dieser stelle
@@ -47,16 +47,25 @@ class World {
   addToMap(mo) {
     if (mo.otherDirection) {
       // erstmal checken ob character eine andere ricvhtung hat
-      this.ctx.save(); // wenn ja speichern vom aktuellen kontext
-      this.ctx.translate(mo.width, 0); // verursacht das verschieben des bildes. also umgekehrt
-      this.ctx.scale(-1, 1); //...gespiegelt einfügen
-      mo.x = mo.x * -1;
+      this.flipImage(mo);
     }
+    mo.draw(this.ctx);
+    mo.drawFrame(this.ctx);
 
-    this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
     if (mo.otherDirection) {
-      mo.x = mo.x * -1;
-      this.ctx.restore(); // wieder rückgängig machen der spiegelung bei rechts laufen
+      this.flipImageBack(mo);
     }
+  }
+
+  flipImage(mo) {
+    this.ctx.save(); // wenn ja speichern vom aktuellen kontext
+    this.ctx.translate(mo.width, 0); // verursacht das verschieben des bildes. also umgekehrt
+    this.ctx.scale(-1, 1); //...gespiegelt einfügen
+    mo.x = mo.x * -1;
+  }
+
+  flipImageBack(mo) {
+    mo.x = mo.x * -1;
+    this.ctx.restore(); // wieder rückgängig machen der spiegelung bei rechts laufen
   }
 }

@@ -53,7 +53,7 @@ class Character extends MovableObject {
 
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
-        this.walking_sound.pause(); 
+        this.walking_sound.pause(); // sound beim springen
       }
 
       this.world.camera_x = -this.x + 75;
