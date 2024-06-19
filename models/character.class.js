@@ -2,7 +2,8 @@ class Character extends MovableObject {
   speed = 5;
   y = 55;
   world;
-  walking_sound = new Audio('audio/running.mp3');  
+  walking_sound = new Audio('audio/running.mp3'); 
+  jumping_sound = new Audio('audio/jump.mp3'); 
 
   IMAGES_WALKING = [
     'img/2_character_pepe/2_walk/W-21.png',
@@ -56,6 +57,7 @@ class Character extends MovableObject {
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
         this.walking_sound.pause(); // sound beim springen
+        this.jumping_sound.play();
       }
 
       this.world.camera_x = -this.x + 75;

@@ -40,7 +40,7 @@ class MovableObject {
 
     if (this instanceof Character) {
       // berechnung position des characters
-      let centerX = this.x + this.width / 2; // x koordinate plus breite : 2
+      let centerX = this.x + this.width / 2; // feststellung mittelpunkt gesamte breite
       let centerY = this.y + this.height - this.visibleHeight; // startpunkt sichtbare höhe
       let visibleCenterX = this.visibleWidth / 2; // hälfte sichtbaren breite
       
