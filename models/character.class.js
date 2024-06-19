@@ -56,7 +56,7 @@ class Character extends MovableObject {
 
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
-        this.walking_sound.pause(); // sound beim springen
+        this.walking_sound.pause(); // lauf sound beim springen unterbinden
         this.jumping_sound.play();
       }
 
