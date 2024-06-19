@@ -19,26 +19,7 @@ class MovableObject extends DrawableObject {
     return this.y < 140;
   }
 
-  drawFrame(ctx) {
-    ctx.beginPath();
-    ctx.lineWidth = '2';
-    ctx.strokeStyle = 'white';
 
-    if (this instanceof Character || this instanceof Endboss) {
-      // berechnung position des characters
-      let centerX = this.x + this.width / 2; // feststellung mittelpunkt gesamte breite
-      let centerY = this.y + this.height - this.visibleHeight; // startpunkt sichtbare höhe
-      let visibleCenterX = this.visibleWidth / 2; // hälfte sichtbaren breite
-
-      let frameX = centerX - visibleCenterX; // rahmen um den sichtbaren bereich des charakters
-      let frameY = centerY;
-
-      ctx.rect(frameX, frameY, this.visibleWidth, this.visibleHeight);
-    } else if (this instanceof Chicken || this instanceof smallChicken) {
-      ctx.rect(this.x, this.y, this.width, this.height);
-    }
-    ctx.stroke();
-  }
 
   isColliding(mo) {
     return (
