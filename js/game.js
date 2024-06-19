@@ -6,10 +6,11 @@ function init() {
   canvas = document.getElementById('canvas');
   world = new World(canvas, keyboard);
 
-  console.log('My Character is', world.character);
+  // console.log('My Character is', world.character);
 }
 
 window.addEventListener('keydown', (e) => {
+  // console.log(e.keyCode);  // hiermit kann man tastencode auslesen in der konsole 
   if (e.keyCode == 39) {
     keyboard.RIGHT = true;
   }
@@ -19,9 +20,9 @@ window.addEventListener('keydown', (e) => {
   if (e.keyCode == 32) {
     keyboard.SPACE = true;
   }
-  // if(e.keyCode == ) {
-  //     keyboard. = true;
-  // }
+  if(e.keyCode == 68) {
+      keyboard.D = true;
+  }
   //   console.log(e);
 });
 
@@ -35,8 +36,8 @@ window.addEventListener('keyup', (e) => {
   if (e.keyCode == 32) {
     keyboard.SPACE = false;
   }
-  // if(e.keyCode == ) {
-  //     keyboard. = false;
-  // }
+  if(e.keyCode == 68) {
+      keyboard.D = false;
+  }
   //   console.log(e);
 });
