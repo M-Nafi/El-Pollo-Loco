@@ -10,6 +10,8 @@ class MovableObject {
   otherDirection = false;
   speedY = 0;
   acceleration = 2; // geschwindigkeit fallen. anpassen!
+  energy = 100;
+  lastHit = 0;
 
   applyGravity() {
     setInterval(() => {
@@ -63,6 +65,25 @@ class MovableObject {
     );
   }
 
+  hit() {
+    this.energy -= 5;
+    if (this.energy < 0) {
+      this.energy = 0;
+    } else {
+      this.lastHit = new Date().getTime();  // zeit setzen. vergangene zeit seit 01.01.1970 in ms
+    }
+  }
+
+  isHurt() {
+    let timepassed = new Date().getTime() - this.lastHit;  // differenz in ms
+    timepassed = timepassed / 1000;  // differenz in sekunden   
+    return timepassed < 1;
+  }
+
+  isDead() {
+    return this.energy == 0;
+  }
+
   /**
    *
    * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...]
@@ -76,7 +97,7 @@ class MovableObject {
   }
 
   playAnimation(images) {
-    let i = this.currentImage % this.IMAGES_WALKING.length; // i = ist aufgrund der modulo (& bzw. ist der rest...) die reihenfolge von images walking in der unendlich schleife
+    let i = this.currentImage % images.length; // i = ist aufgrund der modulo (& bzw. ist der rest...) die reihenfolge von images walking in der unendlich schleife
     // praktisch sieht das so aus: i = 0, 1, 2, 3, 4, 5 und dann nicht 6 sondern wieder von vorne 0, 1, 2 usw...
     let path = images[i];
     this.img = this.imageCache[path];
@@ -92,6 +113,6 @@ class MovableObject {
   }
 
   jump() {
-    this.speedY = 20; // höhe des sprung evtl anpassen
+    this.speedY = 22;  // höhe des sprung evtl anpassen
   }
 }
