@@ -1,11 +1,4 @@
-class MovableObject {
-  x = 120;
-  y = 145;
-  img;
-  height = 280;
-  width = 100;
-  imageCache = {};
-  currentImage = 0;
+class MovableObject extends DrawableObject {
   speed = 0.15;
   otherDirection = false;
   speedY = 0;
@@ -24,15 +17,6 @@ class MovableObject {
 
   isAboveGround() {
     return this.y < 140;
-  }
-
-  loadImage(path) {
-    this.img = new Image(); // ist das gleiche wie document.getElementById('image')...
-    this.img.src = path;
-  }
-
-  draw(ctx) {
-    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
   drawFrame(ctx) {
@@ -70,30 +54,18 @@ class MovableObject {
     if (this.energy < 0) {
       this.energy = 0;
     } else {
-      this.lastHit = new Date().getTime();  // zeit setzen. vergangene zeit seit 01.01.1970 in ms
+      this.lastHit = new Date().getTime(); // zeit setzen. vergangene zeit seit 01.01.1970 in ms
     }
   }
 
   isHurt() {
-    let timepassed = new Date().getTime() - this.lastHit;  // differenz in ms
-    timepassed = timepassed / 1000;  // differenz in sekunden   
+    let timepassed = new Date().getTime() - this.lastHit; // differenz in ms
+    timepassed = timepassed / 1000; // differenz in sekunden
     return timepassed < 1;
   }
 
   isDead() {
     return this.energy == 0;
-  }
-
-  /**
-   *
-   * @param {Array} arr - ['img/image1.png', 'img/image2.png', ...]
-   */
-  loadImages(arr) {
-    arr.forEach((path) => {
-      let img = new Image();
-      img.src = path;
-      this.imageCache[path] = img;
-    });
   }
 
   playAnimation(images) {
@@ -113,6 +85,6 @@ class MovableObject {
   }
 
   jump() {
-    this.speedY = 22;  // höhe des sprung evtl anpassen
+    this.speedY = 22; // höhe des sprung evtl anpassen
   }
 }
