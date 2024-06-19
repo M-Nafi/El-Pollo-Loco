@@ -6,6 +6,7 @@ class World {
   keyboard;
   camera_x = 0;
   statusBar = new Statusbar();
+  statusBarCoin = new StatusbarCoin();
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -42,6 +43,7 @@ class World {
     this.ctx.translate(-this.camera_x, 0);  // back
     // space for fixed objects. also die anderen bars...
     this.addToMap(this.statusBar);
+    this.addToMap(this.statusBarCoin);
     this.ctx.translate(this.camera_x, 0); // forwards
    
     this.addToMap(this.character);
