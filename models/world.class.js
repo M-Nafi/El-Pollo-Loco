@@ -33,16 +33,16 @@ class World {
 
   checkThrowObjects() {
     if (this.keyboard.D) {
-      let bottle = new ThrowableObject(this.character.x + 70, this. character.y + 130);
+      let bottle = new ThrowableObject(this.character.x + 70, this.character.y + 130);
       this.throwableObjects.push(bottle);
     }
   }
 
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {         
+      if (this.character.isColliding(enemy)) {
         this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);         
+        this.statusBar.setPercentage(this.character.energy);
       }
     });
   }
@@ -54,14 +54,14 @@ class World {
     // die reihenfolge hier bestimmt auch was im vordergrund ist und was nicht. daher achtung an dieser stelle
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
-    
-    this.ctx.translate(-this.camera_x, 0);  // back    
+
+    this.ctx.translate(-this.camera_x, 0); // back
     this.addToMap(this.statusBar);
     this.addToMap(this.statusBarCoin);
     this.addToMap(this.statusBarBottle);
-    this.addToMap(this.statusBarEndboss);    
-    this.ctx.translate(this.camera_x, 0); // forwards      
-    
+    this.addToMap(this.statusBarEndboss);
+    this.ctx.translate(this.camera_x, 0); // forwards
+
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.throwableObjects);
