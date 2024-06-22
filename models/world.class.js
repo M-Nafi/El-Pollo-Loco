@@ -9,7 +9,8 @@ class World {
   statusBarCoin = new StatusbarCoin();
   statusBarBottle = new StatusbarBottle();
   statusBarEndboss = new StatusbarEndboss();
-  throwableObjects = [];
+  throwableObjects = [];  
+  
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext('2d');
@@ -62,9 +63,10 @@ class World {
     this.addToMap(this.statusBarEndboss);
     this.ctx.translate(this.camera_x, 0); // forwards
 
+    this.addObjectsToMap(this.level.bottles); 
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.throwableObjects);
+    this.addObjectsToMap(this.throwableObjects);          
 
     this.ctx.translate(-this.camera_x, 0);
 
