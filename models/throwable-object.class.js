@@ -27,11 +27,11 @@ class ThrowableObject extends MovableObject {
   }
 
   throw() {
-    this.speedY = 20;
+    this.speedY = 22;
     this.applyGravity();
 
     this.throwInterval = setInterval(() => {
-      this.x += 10;
+      this.x += 13;
       this.playAnimation(this.BOTTLE_ROTATION);
       if (this.y >= 370) {  // bei ca 350 ist flasche optisch am boden evtl anpassen
         this.playSplashAnimation();

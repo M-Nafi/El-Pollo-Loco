@@ -31,7 +31,7 @@ class DrawableObject {
       let frameY = centerY;
 
       ctx.rect(frameX, frameY, this.visibleWidth, this.visibleHeight);
-    } else if (this instanceof Chicken || this instanceof smallChicken) {
+    } else if (this instanceof Chicken || this instanceof smallChicken || this instanceof Bottles) {
       ctx.rect(this.x, this.y, this.width, this.height);
     }
     ctx.stroke();
