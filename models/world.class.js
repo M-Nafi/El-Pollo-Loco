@@ -57,9 +57,9 @@ class World {
   }
 
   checkCollisions() {
-    this.level.bottles.forEach((bottles) => {
-      if (this.character.isColliding(bottles)) {
-        this.collectBottle(bottles);
+    this.level.bottles.forEach((bottle) => {
+      if (this.character.isColliding(bottle)) {
+        this.collectBottle(bottle);
       }
     });
     this.level.enemies.forEach((enemy) => {
@@ -68,7 +68,29 @@ class World {
         this.statusBar.setPercentage(this.character.energy);
       }
     });
+    this.throwableObjects.forEach((bottle) => {
+      this.checkCollisionWithEnemies(bottle);
+    });
   }
+
+
+  checkCollisionWithEnemies(bottle) {
+    this.level.enemies.forEach((enemy, index) => {
+      if (bottle.isColliding(enemy)) {
+        if (enemy.IMAGES_DEAD && enemy.IMAGES_DEAD.length > 0) {
+          enemy.loadImage(enemy.IMAGES_DEAD[0]); 
+          enemy.isDead = true; 
+  
+          setTimeout(() => {
+            if (this.level.enemies.includes(enemy)) { 
+              this.level.enemies.splice(index, 1); 
+            }
+          }, 1000);
+        } 
+      }
+    });
+  }
+  
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // hiermit wird das vorher eingefügte bild gelöscht, wichtig bei bewegungen
@@ -107,7 +129,7 @@ class World {
 
   addToMap(mo) {
     if (mo.otherDirection) {
-      // erstmal checken ob character eine andere ricvhtung hat
+      // checken ob character eine andere ricvhtung hat
       this.flipImage(mo);
     }
     mo.draw(this.ctx);

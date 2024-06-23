@@ -2,6 +2,7 @@ class smallChicken extends MovableObject {
   y = 375; 
   height = 40; 
   width = 45;
+  isDead = false;
 
   IMAGES_WALKING = [
     'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
@@ -9,10 +10,14 @@ class smallChicken extends MovableObject {
     'img/3_enemies_chicken/chicken_small/1_walk/3_w.png',
   ];
 
+  IMAGES_DEAD = [
+    'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
+  ];
+
   constructor() {
     super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
     this.loadImages(this.IMAGES_WALKING);
-    this.x = 500 + Math.random() * 1700; // startposition 500px und 
+    this.x = 500 + Math.random() * 1700; 
     this.speed = 0.17 + Math.random() * 0.45;
     this.applyGravity();
     this.animate();
@@ -36,17 +41,25 @@ class smallChicken extends MovableObject {
 
   animate() {
     setInterval(() => {
-      this.moveLeft();
+      if (!this.isDead) { 
+        this.moveLeft();
+      }
     }, 1000 / 60);
+  
     setInterval(() => {
-      this.playAnimation(this.IMAGES_WALKING);
-    }, 150);    
+      if (!this.isDead) { 
+        this.playAnimation(this.IMAGES_WALKING);
+      }
+    }, 150); 
+  
     setInterval(() => {
-      this.jump();
-    }, 3000 + Math.random() * 2000); // zufällig springen evtl anpassen
+      if (!this.isDead) { 
+        this.jump();
+      }
+    }, 3000 + Math.random() * 2000); 
   }
 
   jump() {
-    this.speedY = 5 + Math.random() * 10; // höhe des zufälligen sprungs evtl anpassen
+    this.speedY = 5 + Math.random() * 10; 
   }
 }
