@@ -54,21 +54,65 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.x = 2600;
     this.animate();
-    this.visibleHeight = 210; //
+    this.visibleHeight = 210; 
     this.visibleWidth = 235;
   }
+
+  isPlayerClose() {
+    return world && world.character && Math.abs(this.x - world.character.x) < 500;
+  }   
 
   animate() {
     setInterval(() => {
       if (!this.isDead) {
-        // this.moveLeft();
+        if (this.isPlayerClose()) {
+          this.alertAnimation();
+        } else {
+          this.x += this.speed;
+          this.walkAnimation();
+        }
       }
-    }, 1000 / 60);
+    }, 300); // geschwindigkeit animation. anpassen    
+  }
+  
 
-    setInterval(() => {
-      if (!this.isDead) {
-        this.playAnimation(this.IMAGES_WALKING);
+  alertAnimation() {
+    this.playAnimation(this.IMAGES_ALERT);
+    setTimeout(() => {
+      this.attackAndMove();
+    }, 3000); // 3sek alert
+  }
+
+  attackAndMove() {
+    const intervalId = setInterval(() => {
+      if (this.isDead) {
+        clearInterval(intervalId);
+        return;
       }
-    }, 200); // Geschwindigkeit der Chicken später entsprechend anpassen
+      this.playAnimation(this.IMAGES_ATTACK);
+      this.moveLeft();
+      setTimeout(() => {
+        this.playAnimation(this.IMAGES_WALKING);
+        this.moveLeft();
+      }, 2000); // 1 sek atack
+    }, 3000); // alle 3 sek zw attacke und gehen
+  }
+
+  walkAnimation() {
+    this.playAnimation(this.IMAGES_WALKING);
+  }
+
+  hurtAnimation() {
+    this.playAnimation(this.IMAGES_HURT);
+  }
+
+  deadAnimation() {
+    this.playAnimation(this.IMAGES_DEAD);
+  }
+
+  moveLeft() {
+    this.x -= this.speed; 
   }
 }
+
+// !this.isDead
