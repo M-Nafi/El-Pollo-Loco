@@ -3,7 +3,7 @@ class Endboss extends MovableObject {
   width = 250;
   y = 185;
   isDead = false;
-
+ 
   IMAGES_WALKING = [
     'img/4_enemie_boss_chicken/1_walk/G1.png',
     'img/4_enemie_boss_chicken/1_walk/G2.png',
@@ -56,6 +56,7 @@ class Endboss extends MovableObject {
     this.animate();
     this.visibleHeight = 210; 
     this.visibleWidth = 235;
+    this.speed = 0.75;
   }
 
   isPlayerClose() {
@@ -64,39 +65,38 @@ class Endboss extends MovableObject {
 
   animate() {
     setInterval(() => {
-      if (!this.isDead) {
-        if (this.isPlayerClose()) {
-          this.alertAnimation();
-        } else {
-          this.x += this.speed;
-          this.walkAnimation();
+        if (!this.isDead) {
+            if (this.isPlayerClose()) {
+                this.alertAnimation();
+            } else {
+                this.walkAnimation();
+                this.moveLeft();
+            }
         }
-      }
-    }, 300); // geschwindigkeit animation. anpassen    
-  }
-  
+    }, 300); 
+}
 
-  alertAnimation() {
+alertAnimation() {
     this.playAnimation(this.IMAGES_ALERT);
     setTimeout(() => {
-      this.attackAndMove();
-    }, 3000); // 3sek alert
-  }
+        this.moveLeftAndAttack();
+    }, 1500); 
+}
 
-  attackAndMove() {
-    const intervalId = setInterval(() => {
-      if (this.isDead) {
-        clearInterval(intervalId);
-        return;
-      }
-      this.playAnimation(this.IMAGES_ATTACK);
-      this.moveLeft();
-      setTimeout(() => {
-        this.playAnimation(this.IMAGES_WALKING);
-        this.moveLeft();
-      }, 2000); // 1 sek atack
-    }, 3000); // alle 3 sek zw attacke und gehen
-  }
+moveLeftAndAttack() {
+    this.walkAnimation();
+    this.moveLeft();
+    setInterval(() => {
+        if (!this.isDead) {
+            this.playAnimation(this.IMAGES_ATTACK);
+            this.moveLeft();
+            setTimeout(() => {
+                this.walkAnimation();
+                this.moveLeft();
+            }, 1000); 
+        }
+    }, 3000);
+}
 
   walkAnimation() {
     this.playAnimation(this.IMAGES_WALKING);
@@ -114,5 +114,3 @@ class Endboss extends MovableObject {
     this.x -= this.speed; 
   }
 }
-
-// !this.isDead

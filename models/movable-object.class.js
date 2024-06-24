@@ -63,7 +63,7 @@ class MovableObject extends DrawableObject {
     this.x += this.speed;
   }
 
-  moveLeft() {   
+  moveLeft() {
     this.x -= this.speed; // statt this speed kann man auch 0.15 reinschreiben.
   }
 

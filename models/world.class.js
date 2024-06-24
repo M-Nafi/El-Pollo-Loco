@@ -77,7 +77,10 @@ class World {
   checkCollisionWithEnemies(bottle) {
     this.level.enemies.forEach((enemy, index) => {
       if (bottle.isColliding(enemy)) {
-        if (enemy.IMAGES_DEAD && enemy.IMAGES_DEAD.length > 0) {
+        if (enemy instanceof Endboss) {
+          enemy.hit();
+          this.statusBarEndboss.setPercentage(enemy.energy); 
+        } else if (enemy.IMAGES_DEAD && enemy.IMAGES_DEAD.length > 0) {
           enemy.loadImage(enemy.IMAGES_DEAD[0]); 
           enemy.isDead = true; 
   
