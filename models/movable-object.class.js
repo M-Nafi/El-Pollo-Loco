@@ -33,7 +33,9 @@ class MovableObject extends DrawableObject {
   }
 
   hit() {
-    this.energy -= 5;
+    // this.energy -= 5; ursprüngliche zahl
+    this.energy -= 10;
+    console.log('hit detected, current energy:', this.energy);
     if (this.energy < 0) {
       this.energy = 0;
     } else {
