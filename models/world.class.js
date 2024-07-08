@@ -78,9 +78,9 @@ class World {
     this.level.enemies.forEach((enemy, index) => {
       if (bottle.isColliding(enemy)) {
         if (enemy instanceof Endboss) {
-          console.log('Endboss hit detected'); // Debugging-Ausgabe
+          console.log('Endboss hit detected'); 
           enemy.hit();
-          console.log('Endboss energy after hit:', enemy.energy); // Debugging-Ausgabe
+          // console.log('Endboss energy after hit:', enemy.energy);
           this.statusBarEndboss.setPercentage(enemy.energy);
         } else if (enemy.IMAGES_DEAD && enemy.IMAGES_DEAD.length > 0) {
           enemy.loadImage(enemy.IMAGES_DEAD[0]);

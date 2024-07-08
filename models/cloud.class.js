@@ -16,4 +16,3 @@ class Cloud extends MovableObject {
     requestAnimationFrame(() => this.animate());  // ? call fragen!
   }
 }
-
