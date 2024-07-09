@@ -12,6 +12,7 @@ class World {
   throwableObjects = [];
   collectedBottles = 0;
   maxBottles = 5;
+  coins = new Coins();
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -112,6 +113,7 @@ class World {
     this.ctx.translate(this.camera_x, 0); // forwards
 
     this.addObjectsToMap(this.level.bottles);
+    this.addObjectsToMap(this.level.coins);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.throwableObjects);
