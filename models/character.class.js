@@ -67,8 +67,8 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_LONGIDLE);
     this.animate();
     this.applyGravity();
-    this.visibleHeight = 170; //
-    this.visibleWidth = 70;
+    this.visibleHeight = 170; 
+    this.visibleWidth = 50;
     this.longIdle();
   }
 

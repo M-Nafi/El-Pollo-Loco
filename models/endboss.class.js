@@ -55,7 +55,7 @@ class Endboss extends MovableObject {
     this.x = 2600;
     this.animate();
     this.visibleHeight = 210;
-    this.visibleWidth = 235;
+    this.visibleWidth = 200;
     this.speed = 2.5;
   }
 

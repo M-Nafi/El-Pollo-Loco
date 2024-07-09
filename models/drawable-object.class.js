@@ -18,10 +18,10 @@ class DrawableObject {
 
   drawFrame(ctx) {
     ctx.beginPath();
-    ctx.lineWidth = '2';
+    ctx.lineWidth = '1';
     ctx.strokeStyle = 'white';
 
-    if (this instanceof Character || this instanceof Endboss) {
+    if (this instanceof Character || this instanceof Endboss || this instanceof Bottles) {
       // berechnung position des characters
       let centerX = this.x + this.width / 2; // feststellung mittelpunkt gesamte breite
       let centerY = this.y + this.height - this.visibleHeight; // startpunkt sichtbare höhe
