@@ -14,7 +14,7 @@ class World {
   maxBottles = 5;
 
   constructor(canvas, keyboard) {
-    this.ctx = canvas.getContext('2d');
+    this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.draw();
@@ -35,7 +35,10 @@ class World {
 
   checkThrowObjects() {
     if (this.keyboard.D && this.collectedBottles > 0) {
-      let bottle = new ThrowableObject(this.character.x + 70, this.character.y + 130);
+      let bottle = new ThrowableObject(
+        this.character.x + 70,
+        this.character.y + 130
+      );
       this.throwableObjects.push(bottle);
       this.collectedBottles--;
       this.statusBarBottle.setPercentage(this.collectedBottles);
@@ -43,16 +46,16 @@ class World {
   }
 
   collectBottle(bottle) {
-    if (this.collectedBottles < this.maxBottles) { 
-      let index = this.level.bottles.indexOf(bottle); 
+    if (this.collectedBottles < this.maxBottles) {
+      let index = this.level.bottles.indexOf(bottle);
       if (index > -1) {
-        this.level.bottles.splice(index, 1); 
+        this.level.bottles.splice(index, 1);
         setTimeout(() => {
-          this.level.bottles.push(bottle); 
+          this.level.bottles.push(bottle);
         }, 5000);
       }
-      this.collectedBottles++; 
-      this.statusBarBottle.setPercentage(this.collectedBottles); 
+      this.collectedBottles++;
+      this.statusBarBottle.setPercentage(this.collectedBottles);
     }
   }
 
@@ -73,19 +76,16 @@ class World {
     });
   }
 
-
   checkCollisionWithEnemies(bottle) {
     this.level.enemies.forEach((enemy, index) => {
       if (bottle.isColliding(enemy)) {
-        if (enemy instanceof Endboss) {
-          console.log('Endboss hit detected'); 
-          enemy.hit();
-          // console.log('Endboss energy after hit:', enemy.energy);
+        if (enemy instanceof Endboss) {          
+          enemy.hit();          
           this.statusBarEndboss.setPercentage(enemy.energy);
         } else if (enemy.IMAGES_DEAD && enemy.IMAGES_DEAD.length > 0) {
           enemy.loadImage(enemy.IMAGES_DEAD[0]);
           enemy.isDead = true;
-  
+
           setTimeout(() => {
             if (this.level.enemies.includes(enemy)) {
               this.level.enemies.splice(index, 1);
@@ -95,7 +95,6 @@ class World {
       }
     });
   }
-  
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // hiermit wird das vorher eingefügte bild gelöscht, wichtig bei bewegungen

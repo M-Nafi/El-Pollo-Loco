@@ -60,13 +60,20 @@ class Endboss extends MovableObject {
   }
 
   animate() {
-    setInterval(() => {
+    this.animationInterval = setInterval(() => {
       if (!this.isDead) {
         this.alertAnimation();
+        this.walkAnimation();
         this.moveLeft();
+      } else {
+        this.deadAnimation();
+        setTimeout(() => {
+          clearInterval(this.animationInterval); 
+        }, 3000);
       }
     }, 600);
   }
+  
 
   alertAnimation() {
     this.playAnimation(this.IMAGES_ALERT);
@@ -91,12 +98,11 @@ class Endboss extends MovableObject {
     this.x -= this.speed;
   }
 
-  moveLeftAndAttack() {
-    this.walkAnimation();
+  moveLeftAndAttack() {    
     setInterval(() => {
-      if (!this.isDead) {
+      if (!this.isDead) {        
         this.playAnimation(this.IMAGES_ATTACK);
       }
-    }, 3000);
+    }, 2500);
   }
 }

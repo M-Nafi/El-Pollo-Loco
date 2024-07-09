@@ -5,6 +5,7 @@ class MovableObject extends DrawableObject {
   acceleration = 2; // geschwindigkeit fallen. anpassen!
   energy = 100;
   lastHit = 0;
+  hitCount = 0;
 
   applyGravity() {
     setInterval(() => {
@@ -32,16 +33,24 @@ class MovableObject extends DrawableObject {
     );
   }
 
-  hit() {
-    // this.energy -= 5; ursprüngliche zahl
-    this.energy -= 10;
-    // console.log('hit detected, current energy:', this.energy);
+  hit() {    
+    this.energy -= 20;    
     if (this.energy < 0) {
       this.energy = 0;
     } else {
-      this.lastHit = new Date().getTime(); // zeit setzen. vergangene zeit seit 01.01.1970 in ms
+      this.lastHit = new Date().getTime();
+      if (this instanceof Endboss) { 
+        this.hitCount++;
+        this.hurtAnimation(); 
+        if (this.hitCount == 5) {
+          this.energy = 0;
+          this.isDead = true;
+          this.deadAnimation(); 
+        }
+      }
     }
   }
+  // new date = zeit setzen. vergangene zeit seit 01.01.1970 in ms
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit; // differenz in ms
