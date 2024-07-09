@@ -138,6 +138,6 @@ class Character extends MovableObject {
         return;
       }
       this.playAnimation(this.IMAGES_LONGIDLE);
-    }, 600);
+    }, 1000);
   }
 }

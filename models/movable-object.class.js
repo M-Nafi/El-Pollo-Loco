@@ -40,8 +40,8 @@ class MovableObject extends DrawableObject {
     } else {
       this.lastHit = new Date().getTime();
       if (this instanceof Endboss) { 
-        this.hitCount++;
-        this.hurtAnimation(); 
+        this.hitCount++;        
+        this.hurtAnimation();                 
         if (this.hitCount == 5) {
           this.energy = 0;
           this.isDead = true;

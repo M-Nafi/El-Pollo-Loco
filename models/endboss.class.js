@@ -56,7 +56,7 @@ class Endboss extends MovableObject {
     this.animate();
     this.visibleHeight = 210;
     this.visibleWidth = 235;
-    this.speed = 0.75;
+    this.speed = 2.5;
   }
 
   animate() {
@@ -68,18 +68,17 @@ class Endboss extends MovableObject {
       } else {
         this.deadAnimation();
         setTimeout(() => {
-          clearInterval(this.animationInterval); 
+          clearInterval(this.animationInterval);
         }, 3000);
       }
-    }, 600);
+    }, 550);
   }
-  
 
   alertAnimation() {
     this.playAnimation(this.IMAGES_ALERT);
     setTimeout(() => {
       this.moveLeftAndAttack();
-    }, 1500);
+    }, 750);
   }
 
   walkAnimation() {
@@ -98,11 +97,7 @@ class Endboss extends MovableObject {
     this.x -= this.speed;
   }
 
-  moveLeftAndAttack() {    
-    setInterval(() => {
-      if (!this.isDead) {        
-        this.playAnimation(this.IMAGES_ATTACK);
-      }
-    }, 2500);
+  moveLeftAndAttack() {
+    this.playAnimation(this.IMAGES_ATTACK);
   }
 }
