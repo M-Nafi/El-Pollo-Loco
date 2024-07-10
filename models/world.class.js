@@ -86,7 +86,7 @@ class World {
       }
     });
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      if (this.character.isColliding(enemy) && !this.character.isHurt()) {
         this.character.hit();
         this.statusBar.setPercentage(this.character.energy);
       }
@@ -96,6 +96,13 @@ class World {
     });
   }
 
+  isHurt() {
+    let timePassed = new Date().getTime() - this.lastHit; 
+    timePassed = timePassed / 1000; 
+    return timePassed < 1; // 1 sek immunität nach hit
+  }
+
+  
   checkCollisionWithEnemies(bottle) {
     this.level.enemies.forEach((enemy, index) => {
       if (bottle.isColliding(enemy) && !bottle.hasHit) {
@@ -112,7 +119,7 @@ class World {
             }
           }, 1000);
         }
-        bottle.hasHit = true; // Markiere das Bottle-Objekt als getroffen
+        bottle.hasHit = true; 
       }
     });
   }
