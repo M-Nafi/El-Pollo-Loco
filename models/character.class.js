@@ -113,26 +113,33 @@ class Character extends MovableObject {
           this.playAnimation(this.IMAGES_WALKING);
         }
       }
-    }, 50); // 1000
+    }, 50); 
   }
 
   longIdle() {
     setInterval(() => {
       let currentTime = new Date().getTime();
-      if (currentTime - this.lastMoveTime > 3000) {
+      if (currentTime - this.lastMoveTime > 3000 && !this.isDead()) {
         this.playLongIdleAnimation();
         this.snoring_sound.play();
+      } else {
+        this.snoring_sound.pause();
       }
     }, 1500);
   }
 
   playLongIdleAnimation() {
     let longIdleInterval = setInterval(() => {
-      if (this.world.keyboard.LEFT || this.world.keyboard.RIGHT || this.world.keyboard.SPACE || this.world.keyboard.D) {
+      if (
+        this.world.keyboard.LEFT ||
+        this.world.keyboard.RIGHT ||
+        this.world.keyboard.SPACE ||
+        this.world.keyboard.D
+      ) {
         clearInterval(longIdleInterval);
         this.loadImage("img/2_character_pepe/1_idle/idle/I-1.png");
         this.snoring_sound.pause();
-        this.lastMoveTime = new Date().getTime();        
+        this.lastMoveTime = new Date().getTime();
         return;
       }
       this.playAnimation(this.IMAGES_LONGIDLE);
@@ -141,8 +148,8 @@ class Character extends MovableObject {
 
   offset = {
     top: 120,
-    right: 20,   
+    right: 20,
     bottom: 20,
-    left: 20
-  }
+    left: 20,
+  };
 }

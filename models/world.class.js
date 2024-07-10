@@ -11,7 +11,9 @@ class World {
   statusBarEndboss = new StatusbarEndboss();
   throwableObjects = [];
   collectedBottles = 0;
+  collectedCoins = 0;
   maxBottles = 5;
+  maxCoins = 5;
   coins = new Coins();
 
   constructor(canvas, keyboard) {
@@ -46,6 +48,17 @@ class World {
     }
   }
 
+  collectCoin(coin) {
+    let index = this.level.coins.indexOf(coin);
+    if (index > -1) {
+      this.level.coins.splice(index, 1);
+    }
+    this.collectedCoins++;   
+    this.coins.collectedCoins_sound.play();
+    let coinPercentage = (this.collectedCoins / this.maxCoins) * 100;
+    this.statusBarCoin.setPercentage(coinPercentage);
+  }
+
   collectBottle(bottle) {
     if (this.collectedBottles < this.maxBottles) {
       let index = this.level.bottles.indexOf(bottle);
@@ -56,6 +69,7 @@ class World {
         }, 5000);
       }
       this.collectedBottles++;
+      bottle.collectedBottles_sound.play();
       this.statusBarBottle.setPercentage(this.collectedBottles);
     }
   }
@@ -64,6 +78,11 @@ class World {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) {
         this.collectBottle(bottle);
+      }
+    });
+    this.level.coins.forEach((coin) => { 
+      if (this.character.isColliding(coin)) {
+        this.collectCoin(coin);
       }
     });
     this.level.enemies.forEach((enemy) => {

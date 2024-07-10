@@ -30,13 +30,13 @@ class StatusbarCoin extends DrawableObject {
     resolveImageIndex() {
       if (this.percentage == 0) {
         return 0;
-      } else if (this.percentage > 20) {
+      } else if (this.percentage > 0 && this.percentage <= 20) {
         return 1;
-      } else if (this.percentage > 40) {
+      } else if (this.percentage > 20 && this.percentage <= 40) {
         return 2;
-      } else if (this.percentage > 60) {
+      } else if (this.percentage > 40 && this.percentage <= 60) {
         return 3;
-      } else if (this.percentage > 80) {
+      } else if (this.percentage > 60 && this.percentage <= 80) {
         return 4;
       } else {
         return 5;

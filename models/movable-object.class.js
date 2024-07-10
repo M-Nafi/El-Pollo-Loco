@@ -24,15 +24,6 @@ class MovableObject extends DrawableObject {
     }
   }
 
-  // isColliding(mo) {
-  //   return (
-  //     this.x + this.width > mo.x &&
-  //     this.y + this.height > mo.y &&
-  //     this.x < mo.x + mo.width &&
-  //     this.y < mo.y + mo.height
-  //   );
-  // }
-
   isColliding(mo) {
     return (
       this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
@@ -92,10 +83,10 @@ class MovableObject extends DrawableObject {
   }
 
   moveLeft() {
-    this.x -= this.speed; // statt this speed kann man auch 0.15 reinschreiben.
+    this.x -= this.speed; 
   }
 
   jump() {
-    this.speedY = 22; // höhe des sprung evtl anpassen
+    this.speedY = 22; 
   }
 }
