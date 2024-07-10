@@ -79,20 +79,21 @@ class World {
 
   checkCollisionWithEnemies(bottle) {
     this.level.enemies.forEach((enemy, index) => {
-      if (bottle.isColliding(enemy)) {
+      if (bottle.isColliding(enemy) && !bottle.hasHit) {
         if (enemy instanceof Endboss) {          
           enemy.hit();          
           this.statusBarEndboss.setPercentage(enemy.energy);
         } else if (enemy.IMAGES_DEAD && enemy.IMAGES_DEAD.length > 0) {
           enemy.loadImage(enemy.IMAGES_DEAD[0]);
           enemy.isDead = true;
-
+          
           setTimeout(() => {
             if (this.level.enemies.includes(enemy)) {
               this.level.enemies.splice(index, 1);
             }
           }, 1000);
         }
+        bottle.hasHit = true; // Markiere das Bottle-Objekt als getroffen
       }
     });
   }

@@ -98,4 +98,11 @@ class Endboss extends MovableObject {
   moveLeftAndAttack() {
     this.playAnimation(this.IMAGES_ATTACK);
   }
+
+  offset = {
+    top: 40,
+    right: 40,
+    bottom: 40,
+    left: 40,
+  };
 }

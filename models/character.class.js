@@ -138,4 +138,11 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_LONGIDLE);
     }, 1000);
   }
+
+  offset = {
+    top: 120,
+    right: 20,   
+    bottom: 20,
+    left: 20
+  }
 }
