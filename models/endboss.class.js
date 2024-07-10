@@ -3,6 +3,7 @@ class Endboss extends MovableObject {
   width = 250;
   y = 185;
   isDead = false;
+  endBossKilled_sound = new Audio('audio/endbossKilled.mp3');
 
   IMAGES_WALKING = [
     "img/4_enemie_boss_chicken/1_walk/G1.png",
@@ -67,7 +68,7 @@ class Endboss extends MovableObject {
         this.deadAnimation();
         setTimeout(() => {
           clearInterval(this.animationInterval);
-        }, 3000);
+        }, 2500);
       }
     }, 550);
   }
@@ -85,10 +86,12 @@ class Endboss extends MovableObject {
 
   hurtAnimation() {
     this.playAnimation(this.IMAGES_HURT);
+    this.endBossKilled_sound.play();
   }
 
   deadAnimation() {
     this.playAnimation(this.IMAGES_DEAD);
+    this.endBossKilled_sound.play();
   }
 
   moveLeft() {
