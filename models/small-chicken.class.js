@@ -60,6 +60,6 @@ class smallChicken extends MovableObject {
   }
 
   jump() {
-    this.speedY = 5 + Math.random() * 10; 
+    this.speedY = 6 + Math.random() * 10; 
   }
 }

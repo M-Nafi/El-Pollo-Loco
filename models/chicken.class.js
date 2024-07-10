@@ -21,7 +21,24 @@ class Chicken extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.x = 500 + Math.random() * 1700;   
     this.speed = 0.15 + Math.random() * 0.35; // Math.random ist immer eine zufällige zahl zwischen 0 und 1    
+    this.applyGravity();
     this.animate();
+  }
+
+  applyGravity() {
+    setInterval(() => {
+      if (this.isAboveGround() || this.speedY > 0) {
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+      } else {
+        this.y = 348; // setzten der höhe wieder auf die ursprüngliche position
+        this.speedY = 0; // stoppt die bewegung nach unten
+      }
+    }, 1000 / 25);
+  }
+
+  isAboveGround() {
+    return this.y < 348;  // 375 notwendig da mov.obj anders und chicken sonst auf anderer höhe.
   }
 
   animate() {
@@ -30,12 +47,22 @@ class Chicken extends MovableObject {
         this.moveLeft();
       }
     }, 1000 / 60);
-
+  
     setInterval(() => {
       if (!this.isDead) { 
         this.playAnimation(this.IMAGES_WALKING);
       }
-    }, 200); // Geschwindigkeit der Chicken später entsprechend anpassen
+    }, 150); 
+  
+    setInterval(() => {
+      if (!this.isDead) { 
+        this.jump();
+      }
+    }, 3000 + Math.random() * 2000); 
+  }
+
+  jump() {
+    this.speedY = 2 + Math.random() * 10; 
   }
 }
 
