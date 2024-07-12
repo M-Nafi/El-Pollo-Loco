@@ -53,7 +53,7 @@ class World {
     if (index > -1) {
       this.level.coins.splice(index, 1);
     }
-    this.collectedCoins++;   
+    this.collectedCoins++;
     this.coins.collectedCoins_sound.play();
     let coinPercentage = (this.collectedCoins / this.maxCoins) * 100;
     this.statusBarCoin.setPercentage(coinPercentage);
@@ -72,54 +72,80 @@ class World {
       bottle.collectedBottles_sound.play();
       this.statusBarBottle.setPercentage(this.collectedBottles);
     }
-  }
+  }  
 
-  checkCollisions() {
+  checkCollisions() { 
     this.level.bottles.forEach((bottle) => {
-      if (this.character.isColliding(bottle)) {
-        this.collectBottle(bottle);
-      }
-    });
-    this.level.coins.forEach((coin) => { 
-      if (this.character.isColliding(coin)) {
-        this.collectCoin(coin);
-      }
-    });
+      if (this.character.isColliding(bottle)) this.collectBottle(bottle);
+    });  
+   
+    this.level.coins.forEach((coin) => {
+      if (this.character.isColliding(coin)) this.collectCoin(coin);
+    });  
+   
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy) && !this.character.isHurt()) {
-        this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);
+      if (this.character.isColliding(enemy)) {
+        if (this.isCharacterAboveEnemy(this.character, enemy)) {
+          this.hitEnemyFromAbove(enemy);
+        } else if (!(this.character.isAboveGround() && this.character.acceleration >= 2)) {
+          this.character.hit();
+          this.statusBar.setPercentage(this.character.energy);
+        }
       }
-    });
+    });  
+   
     this.throwableObjects.forEach((bottle) => {
       this.checkCollisionWithEnemies(bottle);
     });
   }
 
+  isCharacterAboveEnemy(character, enemy) {
+    return character.y + character.height < enemy.y + enemy.height;
+  }
+
+  hitEnemyFromAbove(enemy) {
+    this.markEnemyAsDead(enemy);
+    this.removeEnemyAfterDelay(enemy);
+  }
+  
+  markEnemyAsDead(enemy) {
+    enemy.loadImage(enemy.IMAGES_DEAD[0]);
+    enemy.hit();
+    enemy.isDead = true;
+  }
+  
+  removeEnemyAfterDelay(enemy) {
+    setTimeout(() => {
+      let index = this.level.enemies.indexOf(enemy);
+      if (index !== -1) {
+        this.level.enemies.splice(index, 1);
+      }
+    }, 1000);
+  }  
+  
   isHurt() {
-    let timePassed = new Date().getTime() - this.lastHit; 
-    timePassed = timePassed / 1000; 
+    let timePassed = new Date().getTime() - this.lastHit;
+    timePassed = timePassed / 1000;
     return timePassed < 1; // 1 sek immunität nach hit
   }
 
-  
   checkCollisionWithEnemies(bottle) {
     this.level.enemies.forEach((enemy, index) => {
       if (bottle.isColliding(enemy) && !bottle.hasHit) {
-        if (enemy instanceof Endboss) {          
-          enemy.hit();          
+        if (enemy instanceof Endboss) {
+          enemy.hit();
           this.statusBarEndboss.setPercentage(enemy.energy);
         } else if (enemy.IMAGES_DEAD && enemy.IMAGES_DEAD.length > 0) {
           enemy.loadImage(enemy.IMAGES_DEAD[0]);
           enemy.isDead = true;
-          
+
           setTimeout(() => {
             if (this.level.enemies.includes(enemy)) {
               this.level.enemies.splice(index, 1);
             }
           }, 1000);
         }
-        bottle.hasHit = true; 
+        bottle.hasHit = true;
       }
     });
   }

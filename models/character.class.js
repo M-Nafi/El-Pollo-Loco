@@ -92,7 +92,7 @@ class Character extends MovableObject {
 
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
-        this.walking_sound.pause(); // lauf sound beim springen unterbinden
+        this.walking_sound.pause(); 
         this.jumping_sound.play();
         this.lastMoveTime = new Date().getTime();
       }
@@ -121,7 +121,7 @@ class Character extends MovableObject {
       let currentTime = new Date().getTime();
       if (currentTime - this.lastMoveTime > 3000 && !this.isDead()) {
         this.playLongIdleAnimation();
-        this.snoring_sound.play();
+        // this.snoring_sound.play();
       } else {
         this.snoring_sound.pause();
       }
@@ -151,5 +151,9 @@ class Character extends MovableObject {
     right: 20,
     bottom: 20,
     left: 20,
-  };
+  } 
+
+  handleIfPepeIsDead() {
+    
+  }
 }

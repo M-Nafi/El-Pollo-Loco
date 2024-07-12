@@ -21,8 +21,7 @@ class StatusbarEndboss extends DrawableObject {
   }
 
   setPercentage(percentage) {
-    this.percentage = percentage;
-    // console.log('statusbar update:', this.percentage); 
+    this.percentage = percentage;   
     let path = this.IMAGES[this.resolveImageIndex()];
     this.img = this.imageCache[path];
   }
