@@ -10,7 +10,7 @@ body {
 }
 
 .d-none {
-  display: none;
+  display: none !important;
 }
 
 canvas,
@@ -49,8 +49,7 @@ canvas,
   }
 }
 
-.start-btn {
-  border-radius: 45px;
+.start-btn {  
   width: 50px;
   transition: width 0.3s;
   padding: 10px;
@@ -69,7 +68,8 @@ h1 {
   font-weight: 100;
   border-radius: 16px;
   box-shadow: 4px 4px 10px 0 rgb(27, 27, 27);
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px; 
 }
 
 h1,
