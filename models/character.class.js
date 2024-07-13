@@ -4,8 +4,9 @@ class Character extends MovableObject {
   world;
   walking_sound = new Audio("audio/running.mp3");
   jumping_sound = new Audio("audio/jump.mp3");
-  hitted_sound = new Audio("audio/behit.mp3");
+  hitted_sound = new Audio("audio/hitted.mp3");
   snoring_sound = new Audio("audio/snoring.mp3");
+  gameover_sound = new Audio("audio/gameover.mp3");
   lastMoveTime = new Date().getTime(); // erfassung letzte bewegung
 
   IMAGES_WALKING = [
@@ -58,6 +59,10 @@ class Character extends MovableObject {
     "img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
 
+  IMAGES_GAMEOVER = [
+    "img/9_intro_outro_screens/game_over/oh no you lost!.png"
+  ];
+
   constructor() {
     super().loadImage("img/2_character_pepe/1_idle/idle/I-1.png");
     this.loadImages(this.IMAGES_WALKING);
@@ -65,6 +70,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_LONGIDLE);
+    this.loadImages(this.IMAGES_GAMEOVER);
     this.animate();
     this.applyGravity();
     this.longIdle();
@@ -92,7 +98,7 @@ class Character extends MovableObject {
 
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
-        this.walking_sound.pause(); 
+        this.walking_sound.pause();
         this.jumping_sound.play();
         this.lastMoveTime = new Date().getTime();
       }
@@ -113,7 +119,7 @@ class Character extends MovableObject {
           this.playAnimation(this.IMAGES_WALKING);
         }
       }
-    }, 50); 
+    }, 50);
   }
 
   longIdle() {
@@ -151,9 +157,5 @@ class Character extends MovableObject {
     right: 20,
     bottom: 20,
     left: 20,
-  } 
-
-  handleIfPepeIsDead() {
-    
-  }
+  };
 }

@@ -40,7 +40,6 @@ class MovableObject extends DrawableObject {
     left: 0,
   };
 
-
   hit() {
     this.energy -= 20;
     if (this.energy < 0) {
@@ -83,10 +82,10 @@ class MovableObject extends DrawableObject {
   }
 
   moveLeft() {
-    this.x -= this.speed; 
+    this.x -= this.speed;
   }
 
   jump() {
-    this.speedY = 22; 
+    this.speedY = 22;
   }
 }

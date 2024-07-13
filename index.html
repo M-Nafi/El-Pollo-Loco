@@ -34,14 +34,21 @@
   <body onload="init()">
     <h1>El Pollo Loco</h1>
 
-    <canvas id="canvas" width="720" height="480"> </canvas>
+    <canvas id="canvas" width="720" height="480" class="d-none"> </canvas>
+    <div class="start-screen-main" id="start_screen">
+      <div class="start-orientation">
+        <img id="start-btn-1" class="start-btn" src="./img/10_game_instruction_icons/zoom-in.png">
+        <img id="start-btn-2" class="start-btn" src="./img/10_game_instruction_icons/play.png">
+        <img id="start-btn-3" class="start-btn" src="./img/10_game_instruction_icons/soundoff.png">
+      </div>
+      <img class="start-screen" src="./img/9_intro_outro_screens/start/startscreen_1.png"/>      
+    </div>
 
     <div class="game-introducing">      
-             
-      <h2><img class="game-instructions-left" src="./img/10_game_instruction_icons/arrow left.png"> Walk Left</h2>      
-      <h2>Key-D for Throw<img class="game-instructions" src="./img/10_game_instruction_icons/bottle.png">Space for Jump</h2>      
-      <h2>Walk Right<img class="game-instructions-right" src="./img/10_game_instruction_icons/arrow left.png"></h2>
-      
+      <h2><img class="game-instructions-left" src="./img/10_game_instruction_icons/arrow left.png"/>Walk Left</h2>
+      <h2>Key-D for Throw<img class="game-instructions" src="./img/10_game_instruction_icons/bottle.png"/>Space for Jump</h2>
+      <h2>Walk Right<img class="game-instructions-right" src="./img/10_game_instruction_icons/arrow left.png"/></h2>
     </div>
+
   </body>
 </html>
