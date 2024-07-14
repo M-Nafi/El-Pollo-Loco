@@ -15,14 +15,18 @@ class World {
   maxBottles = 5;
   maxCoins = 5;
   coins = new Coins();
+  game_sound = new Audio('audio/main.mp3');  
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.statusBarEndboss.world = this;  // spiel sound stoppen wenn spiel zu ende ist. 
     this.draw();
     this.setWorld();
     this.run();
+    this.game_sound.loop = true; 
+    this.game_sound.play();    
   }
 
   setWorld() {
@@ -91,6 +95,8 @@ class World {
           this.character.hit();
           this.statusBar.setPercentage(this.character.energy);
         }
+      } if (this.character.isDead()) {
+        this.game_sound.pause();
       }
     });  
    
@@ -138,14 +144,13 @@ class World {
         } else if (enemy.IMAGES_DEAD && enemy.IMAGES_DEAD.length > 0) {
           enemy.loadImage(enemy.IMAGES_DEAD[0]);
           enemy.isDead = true;
-
           setTimeout(() => {
             if (this.level.enemies.includes(enemy)) {
               this.level.enemies.splice(index, 1);
             }
           }, 1000);
         }
-        bottle.hasHit = true;
+        bottle.hasHit = true;       
       }
     });
   }
@@ -210,4 +215,7 @@ class World {
     mo.x = mo.x * -1;
     this.ctx.restore(); // wieder rückgängig machen der spiegelung bei rechts laufen
   }
+
+  
+
 }

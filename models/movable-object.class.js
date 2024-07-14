@@ -54,7 +54,7 @@ class MovableObject extends DrawableObject {
           this.isDead = true;
           this.deadAnimation();
           if (this instanceof Endboss) {
-            this.handleEndbossIsDeath();  
+            this.handleEndbossIsDeath();
           }
         }
       }
@@ -70,9 +70,9 @@ class MovableObject extends DrawableObject {
 
   isDead() {
     if (this.energy == 0) {
-        if (this instanceof Character) {
-        this.handlePepeIsDeath();
+      if (this instanceof Character) {
         this.gameover_sound.play();
+        this.handlePepeIsDeath();        
       }
       return true;
     }

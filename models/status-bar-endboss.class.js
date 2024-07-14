@@ -24,6 +24,9 @@ class StatusbarEndboss extends DrawableObject {
     this.percentage = percentage;   
     let path = this.IMAGES[this.resolveImageIndex()];
     this.img = this.imageCache[path];
+    if (percentage <= 0) {
+      this.world.game_sound.pause(); 
+    }
   }
 
   resolveImageIndex() {

@@ -74,7 +74,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_GAMEOVER);
     this.animate();
     this.applyGravity();
-    this.longIdle();
+    this.longIdle();   
   }
 
   animate() {
@@ -128,7 +128,7 @@ class Character extends MovableObject {
       let currentTime = new Date().getTime();
       if (currentTime - this.lastMoveTime > 3000 && !this.isDead()) {
         this.playLongIdleAnimation();
-        // this.snoring_sound.play();
+        this.snoring_sound.play();
       } else {
         this.snoring_sound.pause();
       }
@@ -160,19 +160,18 @@ class Character extends MovableObject {
     left: 20,
   };  
 
-  handlePepeIsDeath() {
+  handlePepeIsDeath() {    
     let gameOverImage1 = document.getElementById("game_over_img_1");
     let gameOverImage2 = document.getElementById("game_over_img_2");
-    this.gameover_sound.play();
-
-    setTimeout(() => {   
+   
+    setTimeout(() => {       
       document.querySelector("canvas").style.display = "none";      
-      gameOverImage1.classList.remove("d-none");          
-      setTimeout(() => {      
-        this.gameover_sound.pause();  
+      gameOverImage1.classList.remove("d-none");
+        setTimeout(() => {        
         gameOverImage2.classList.remove("d-none");
-        gameOverImage1.style.display = "none";         
+        gameOverImage1.style.display = "none"; 
+        this.gameover_sound.pause();                
       }, 3000);      
-    }, 3000);        
-  }
+    }, 3000);            
+  }    
 }
