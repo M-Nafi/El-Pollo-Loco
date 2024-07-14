@@ -108,4 +108,20 @@ class Endboss extends MovableObject {
     bottom: 60,
     left: 45,
   };  
+
+  handleEndbossIsDeath() {
+    let winImage1 = document.getElementById("win_img_1");
+    let winImage2 = document.getElementById("win_img_2");
+    // this.gameover_sound.play();
+
+    setTimeout(() => {   
+      document.querySelector("canvas").style.display = "none";      
+      winImage1.classList.remove("d-none");          
+      setTimeout(() => {      
+        // this.gameover_sound.pause();  
+        winImage2.classList.remove("d-none");
+        winImage1.style.display = "none";         
+      }, 3000);      
+    }, 3000);        
+  }
 }

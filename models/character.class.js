@@ -60,7 +60,8 @@ class Character extends MovableObject {
   ];
 
   IMAGES_GAMEOVER = [
-    "img/9_intro_outro_screens/game_over/oh no you lost!.png"
+    "img/9_intro_outro_screens/game_over/oh no you lost!.png",
+    "img/9_intro_outro_screens/game_over/game over!.png",
   ];
 
   constructor() {
@@ -157,5 +158,21 @@ class Character extends MovableObject {
     right: 20,
     bottom: 7,
     left: 20,
-  };
+  };  
+
+  handlePepeIsDeath() {
+    let gameOverImage1 = document.getElementById("game_over_img_1");
+    let gameOverImage2 = document.getElementById("game_over_img_2");
+    this.gameover_sound.play();
+
+    setTimeout(() => {   
+      document.querySelector("canvas").style.display = "none";      
+      gameOverImage1.classList.remove("d-none");          
+      setTimeout(() => {      
+        this.gameover_sound.pause();  
+        gameOverImage2.classList.remove("d-none");
+        gameOverImage1.style.display = "none";         
+      }, 3000);      
+    }, 3000);        
+  }
 }

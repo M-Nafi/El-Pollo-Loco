@@ -13,7 +13,7 @@ body {
   display: none !important;
 }
 
-canvas,
+canvas, .game-over-img, .win-img, 
 .start-screen {
   background-color: black;
   border-radius: 16px;
@@ -25,7 +25,7 @@ canvas,
   justify-content: center;
 }
 
-.start-screen {
+.start-screen, .game-over-img {
   position: relative;
   width: 720px;
   height: 480px;
@@ -114,6 +114,12 @@ h2 {
   width: 35px;
   transform: rotate(270deg);
 }
+
+/* .game-over-img {
+  width: 720px;
+  height: 480px;
+  border-radius: 16px;
+} */
 
 /* Hintergrundbild von Vecteezy.com */
 /* icons from flaticon.com/free-icons */

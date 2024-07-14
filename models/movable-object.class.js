@@ -66,7 +66,14 @@ class MovableObject extends DrawableObject {
   }
 
   isDead() {
-    return this.energy == 0;
+    if (this.energy == 0) {
+        if (this instanceof Character) {
+        this.handlePepeIsDeath();
+        this.gameover_sound.play();
+      }
+      return true;
+    }
+    return false;
   }
 
   playAnimation(images) {
@@ -88,4 +95,6 @@ class MovableObject extends DrawableObject {
   jump() {
     this.speedY = 22;
   }
+
+  schowOptionsAfterGame() {}
 }
