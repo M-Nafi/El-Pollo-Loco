@@ -53,6 +53,9 @@ class MovableObject extends DrawableObject {
           this.energy = 0;
           this.isDead = true;
           this.deadAnimation();
+          if (this instanceof Endboss) {
+            this.handleEndbossIsDeath();  
+          }
         }
       }
     }

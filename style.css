@@ -25,7 +25,7 @@ canvas, .game-over-img, .win-img,
   justify-content: center;
 }
 
-.start-screen, .game-over-img {
+.start-screen, .game-over-img, .win-img {
   position: relative;
   width: 720px;
   height: 480px;
