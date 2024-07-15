@@ -120,6 +120,8 @@ class Endboss extends MovableObject {
     let winImage2 = document.getElementById("win_img_2");    
     setTimeout(() => {
       document.querySelector("canvas").style.display = "none";
+      document.getElementById("game_introducing").style.display = "none";
+      document.getElementById("restart_game").classList.remove("d-none");
       winImage2.classList.remove("d-none");     
       this.win_sound.play();      
     }, 3000);

@@ -25,7 +25,8 @@ canvas, .game-over-img, .win-img,
   justify-content: center;
 }
 
-.start-screen, .game-over-img, .win-img {
+.start-screen, .game-over-img,
+.win-img {
   position: relative;
   width: 720px;
   height: 480px;
@@ -129,7 +130,6 @@ h2 {
   width: 45px;
   filter: grayscale(0);
 }
-
 
 
 /* Hintergrundbild von Vecteezy.com */
