@@ -74,7 +74,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_GAMEOVER);
     this.animate();
     this.applyGravity();
-    this.longIdle();   
+    this.longIdle();
   }
 
   animate() {
@@ -158,20 +158,40 @@ class Character extends MovableObject {
     right: 20,
     bottom: 7,
     left: 20,
-  };  
+  };
 
-  handlePepeIsDeath() {    
-    let gameOverImage1 = document.getElementById("game_over_img_1");
-    let gameOverImage2 = document.getElementById("game_over_img_2");
-   
-    setTimeout(() => {       
-      document.querySelector("canvas").style.display = "none";      
-      gameOverImage1.classList.remove("d-none");
-        setTimeout(() => {        
-        gameOverImage2.classList.remove("d-none");
-        gameOverImage1.style.display = "none"; 
-        this.gameover_sound.pause();                
-      }, 3000);      
-    }, 3000);            
-  }    
+  // handlePepeIsDeath() {
+  //   let gameOverImage1 = document.getElementById("game_over_img_1");
+  //   let gameOverImage2 = document.getElementById("game_over_img_2");
+  //   let gameIntroducing = document.getElementById("game_introducing");
+  //   let restartGame = document.getElementById("restart_game");
+
+  //   setTimeout(() => {
+  //     document.querySelector("canvas").style.display = "none";
+  //     gameIntroducing.style.display = "none";
+  //     restartGame.classList.remove("d-none");
+  //     gameOverImage1.classList.remove("d-none");
+  //     setTimeout(() => {
+  //       gameOverImage2.classList.remove("d-none");
+  //       gameOverImage1.style.display = "none";
+  //       this.gameover_sound.pause();
+  //     }, 3000);
+  //   }, 3000);
+  // }  
+
+  handlePepeIsDeath() {
+    setTimeout(() => {
+      document.querySelector("canvas").style.display = "none";
+      document.getElementById("game_introducing").style.display = "none";
+      document.getElementById("restart_game").classList.remove("d-none");
+      document.getElementById("game_over_img_1").classList.remove("d-none");
+      setTimeout(() => {
+        document.getElementById("game_over_img_2").classList.remove("d-none");
+        document.getElementById("game_over_img_1").style.display = "none";
+        this.gameover_sound.pause();
+      }, 3000);
+    }, 3000);
+  }
+  
+  
 }

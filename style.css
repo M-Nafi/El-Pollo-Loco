@@ -89,7 +89,7 @@ h2 {
   gap: 5px;
 }
 
-.game-introducing {
+.game-introducing, .restart-game-part {
   display: flex;
   flex-wrap: wrap;
   width: 720px;
@@ -100,20 +100,37 @@ h2 {
   box-shadow: 4px 4px 10px 0 rgb(27, 27, 27);
 }
 
-.game-instructions-left {
-  width: 35px;
+.restart-game-part {
+  gap: 5px;
+  justify-content: center; 
+}
+
+.game-instructions-left { 
   transform: rotate(90deg);
 }
 
-.game-instructions {
-  width: 35px;
-  height: 30px;
+.game-instructions, .game-instructions-left, .game-instructions-right {
+  width: 35px;  
 }
 
-.game-instructions-right {
-  width: 35px;
+.game-instructions-right { 
   transform: rotate(270deg);
 }
+
+.restart-icon {
+  padding-left: 16px;
+  padding-right: 16px;
+  cursor: pointer;
+  transition: width 0.3s;
+  filter: grayscale(1);
+}
+
+.restart-icon:hover {
+  width: 45px;
+  filter: grayscale(0);
+}
+
+
 
 /* Hintergrundbild von Vecteezy.com */
 /* icons from flaticon.com/free-icons */

@@ -1,11 +1,41 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+// let startScreen = document.getElementById('start_screen');
 
-function init() {  
-  // document.querySelector("canvas").style.display = "none";
+
+// function init() {  
+//   // document.querySelector("canvas").style.display = "none";
+//   canvas = document.getElementById('canvas');
+//   world = new World(canvas, keyboard);
+//   startScreen.classList.add('d-none'); 
+//   canvas.classList.remove('d-none');      
+// }
+
+function init() {
   canvas = document.getElementById('canvas');
-  world = new World(canvas, keyboard);  
+  startScreen = document.getElementById('start_screen'); // hier funktioniert es? Fragen!
+
+  if (canvas && startScreen) {
+    world = new World(canvas, keyboard);
+    startScreen.classList.add('d-none');  
+    canvas.classList.remove('d-none');    
+  } else {
+    console.error('hier stimmt was nicht!');
+  }
+}
+
+function restartGame() {
+  let canvas = document.querySelector("canvas");
+  let gameOverImage2 = document.getElementById("game_over_img_2");
+  let gameIntroducing = document.getElementById("game_introducing");
+  let restartGame = document.getElementById("restart_game");
+
+  canvas.style.display = "";  
+  gameOverImage2.classList.add("d-none");  
+  gameIntroducing.style.display = "";  
+  restartGame.classList.add("d-none");  
+  location.reload(); 
 }
 
 window.addEventListener('keydown', (e) => {
