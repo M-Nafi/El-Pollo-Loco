@@ -142,6 +142,7 @@ class World {
       if (bottle.isColliding(enemy) && !bottle.hasHit) {
         if (enemy instanceof Endboss) {
           enemy.hit();
+          enemy.increaseSpeed();
           this.statusBarEndboss.setPercentage(enemy.energy);
         } else if (enemy.IMAGES_DEAD && enemy.IMAGES_DEAD.length > 0) {
           enemy.loadImage(enemy.IMAGES_DEAD[0]);
