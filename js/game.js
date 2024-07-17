@@ -1,28 +1,25 @@
-let canvas;
+// let canvas;
 let world;
 let keyboard = new Keyboard();
-// let startScreen = document.getElementById('start_screen');
-
+let gameOver = false;
 
 // function init() {  
 //   // document.querySelector("canvas").style.display = "none";
-//   canvas = document.getElementById('canvas');
-//   world = new World(canvas, keyboard);
-//   startScreen.classList.add('d-none'); 
-//   canvas.classList.remove('d-none');      
+//   // canvas = document.getElementById('canvas');
+//   // world = new World(canvas, keyboard);
+//   // startScreen.classList.add('d-none'); 
+//   // canvas.classList.remove('d-none');      
 // }
 
-function init() {
+function startGame() {
   canvas = document.getElementById('canvas');
-  startScreen = document.getElementById('start_screen'); // hier funktioniert es? Fragen!
+  startScreen = document.getElementById('start_screen'); 
 
   if (canvas && startScreen) {
     world = new World(canvas, keyboard);
     startScreen.classList.add('d-none');  
     canvas.classList.remove('d-none');    
-  } else {
-    console.error('hier stimmt was nicht!');
-  }
+  } 
 }
 
 function restartGame() {

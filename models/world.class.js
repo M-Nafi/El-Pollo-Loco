@@ -36,6 +36,8 @@ class World {
   run() {
     setInterval(() => {
       this.checkCollisions();
+    }, 100);  
+    setInterval(() => {
       this.checkThrowObjects();
     }, 200);
   }
@@ -88,7 +90,7 @@ class World {
     });  
    
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      if (this.character.isColliding(enemy) && !enemy.isDead) { // !!!
         if (this.isCharacterAboveEnemy(this.character, enemy)) {
           this.hitEnemyFromAbove(enemy);
         } else if (!(this.character.isAboveGround() && this.character.acceleration >= 2)) {

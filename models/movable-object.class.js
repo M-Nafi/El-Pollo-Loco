@@ -70,8 +70,7 @@ class MovableObject extends DrawableObject {
 
   isDead() {
     if (this.energy == 0) {
-      if (this instanceof Character) {
-        this.gameover_sound.play();
+      if (this instanceof Character) {        
         this.handlePepeIsDeath();        
       }
       return true;

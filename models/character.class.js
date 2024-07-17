@@ -126,7 +126,7 @@ class Character extends MovableObject {
   longIdle() {
     setInterval(() => {
       let currentTime = new Date().getTime();
-      if (currentTime - this.lastMoveTime > 3000 && !this.isDead()) {
+      if (currentTime - this.lastMoveTime > 3000 && !this.isDead() && !gameOver) { // 
         this.playLongIdleAnimation();
         this.snoring_sound.play();
       } else {
@@ -137,12 +137,8 @@ class Character extends MovableObject {
 
   playLongIdleAnimation() {
     let longIdleInterval = setInterval(() => {
-      if (
-        this.world.keyboard.LEFT ||
-        this.world.keyboard.RIGHT ||
-        this.world.keyboard.SPACE ||
-        this.world.keyboard.D
-      ) {
+      if (this.world.keyboard.LEFT || this.world.keyboard.RIGHT ||
+        this.world.keyboard.SPACE || this.world.keyboard.D) {
         clearInterval(longIdleInterval);
         this.loadImage("img/2_character_pepe/1_idle/idle/I-1.png");
         this.snoring_sound.pause();
@@ -158,40 +154,58 @@ class Character extends MovableObject {
     right: 20,
     bottom: 7,
     left: 20,
-  };
-
-  // handlePepeIsDeath() {
-  //   let gameOverImage1 = document.getElementById("game_over_img_1");
-  //   let gameOverImage2 = document.getElementById("game_over_img_2");
-  //   let gameIntroducing = document.getElementById("game_introducing");
-  //   let restartGame = document.getElementById("restart_game");
-
-  //   setTimeout(() => {
-  //     document.querySelector("canvas").style.display = "none";
-  //     gameIntroducing.style.display = "none";
-  //     restartGame.classList.remove("d-none");
-  //     gameOverImage1.classList.remove("d-none");
-  //     setTimeout(() => {
-  //       gameOverImage2.classList.remove("d-none");
-  //       gameOverImage1.style.display = "none";
-  //       this.gameover_sound.pause();
-  //     }, 3000);
-  //   }, 3000);
-  // }  
-
+  };  
+  
   handlePepeIsDeath() {
+    gameOver = true;  
+
     setTimeout(() => {
       document.querySelector("canvas").style.display = "none";
-      document.getElementById("game_introducing").style.display = "none";
-      document.getElementById("restart_game").classList.remove("d-none");
-      document.getElementById("game_over_img_1").classList.remove("d-none");
-      setTimeout(() => {
-        document.getElementById("game_over_img_2").classList.remove("d-none");
-        document.getElementById("game_over_img_1").style.display = "none";
-        this.gameover_sound.pause();
-      }, 3000);
-    }, 3000);
-  }
+    document.getElementById("game_introducing").style.display = "none";
+    document.getElementById("restart_game").classList.remove("d-none");
+    document.getElementById("game_over_img_1").classList.remove("d-none");
+    }, 3000);    
   
+    setTimeout(() => {
+      document.getElementById("game_over_img_2").classList.remove("d-none");
+      document.getElementById("game_over_img_1").style.display = "none";
+    }, 5000);  
+    
+    this.gameover_sound.play();  
+    
+    setTimeout(() => {
+      if (!this.gameover_sound.paused) {
+        this.gameover_sound.pause();
+        this.gameover_sound.currentTime = 0; 
+      }
+    }, 6000);
+  }
+
+
+  // vorschlag von chatgpt
+
+  // handlePepeIsDeath() {
+  //   setTimeout(() => {
+  //     this.helpFunktion1(); 
+  //     setTimeout(() => {
+  //       this.helpFunction2(); 
+  //     }, 3000);
+  //   }, 3000);
+  // }
+  
+  // helpFunktion1 = () => {
+  //   document.querySelector("canvas").style.display = "none";
+  //   document.getElementById("game_introducing").style.display = "none";
+  //   document.getElementById("restart_game").classList.remove("d-none");
+  //   document.getElementById("game_over_img_1").classList.remove("d-none");
+  // }
+  
+  // helpFunction2 = () => {
+  //   document.getElementById("game_over_img_2").classList.remove("d-none");
+  //   document.getElementById("game_over_img_1").style.display = "none";
+  //   this.gameover_sound.pause();
+  // }  
+
+
   
 }

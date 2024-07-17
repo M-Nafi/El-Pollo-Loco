@@ -117,6 +117,7 @@ class Endboss extends MovableObject {
   };
 
   handleEndbossIsDeath() {   
+    gameOver = true;
     let winImage2 = document.getElementById("win_img_2");    
     setTimeout(() => {
       document.querySelector("canvas").style.display = "none";
