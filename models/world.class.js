@@ -36,7 +36,7 @@ class World {
   run() {
     setInterval(() => {
       this.checkCollisions();
-    }, 100);  
+    }, 150);  
     setInterval(() => {
       this.checkThrowObjects();
     }, 200);
@@ -89,19 +89,23 @@ class World {
       if (this.character.isColliding(coin)) this.collectCoin(coin);
     });  
    
-    this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy) && !enemy.isDead) { // !!!
-        if (this.isCharacterAboveEnemy(this.character, enemy)) {
-          this.hitEnemyFromAbove(enemy);
-        } else if (!(this.character.isAboveGround() && this.character.acceleration >= 2)) {
-          this.character.hit();
-          this.statusBar.setPercentage(this.character.energy);
+    this.level.enemies.forEach((enemy) => { 
+      if (this.character.isColliding(enemy) && !enemy.isDead) { 
+        if (enemy instanceof Endboss || 
+          !(this.isCharacterAboveEnemy(this.character, enemy) || 
+          (this.character.isAboveGround() && this.character.acceleration >= 2))) { 
+          this.character.hit(); 
+          this.statusBar.setPercentage(this.character.energy); 
+        } else if (this.isCharacterAboveEnemy(this.character, enemy)) { 
+          this.hitEnemyFromAbove(enemy); 
         }
-      } if (this.character.isDead()) {
+      }
+      if (this.character.isDead()) { 
         this.game_sound.pause();
       }
-    });  
-   
+    });
+    
+    
     this.throwableObjects.forEach((bottle) => {
       this.checkCollisionWithEnemies(bottle);
     });
@@ -218,7 +222,4 @@ class World {
     mo.x = mo.x * -1;
     this.ctx.restore(); // wieder rückgängig machen der spiegelung bei rechts laufen
   }
-
-  
-
 }

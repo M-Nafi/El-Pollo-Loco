@@ -40,16 +40,6 @@ canvas, .game-over-img, .win-img,
   justify-content: space-between; 
 }
 
-/* für den startbutton */
-@keyframes rotating {
-  0% {
-    rotate: 0;
-  }
-  100% {
-    rotate: 1turn;
-  }
-}
-
 .start-btn {  
   width: 50px;
   transition: width 0.3s;

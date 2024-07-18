@@ -1,4 +1,4 @@
-// let canvas;
+let canvas;
 let world;
 let keyboard = new Keyboard();
 let gameOver = false;
@@ -11,7 +11,7 @@ let gameOver = false;
 //   // canvas.classList.remove('d-none');      
 // }
 
-function startGame() {
+function startGame() {  
   canvas = document.getElementById('canvas');
   startScreen = document.getElementById('start_screen'); 
 
