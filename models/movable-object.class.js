@@ -61,8 +61,7 @@ class MovableObject extends DrawableObject {
         }
       }
     }
-  }
-  
+  }  
   // new date = zeit setzen. vergangene zeit seit 01.01.1970 in ms
 
   isHurt() {
@@ -101,5 +100,7 @@ class MovableObject extends DrawableObject {
     this.speedY = 22;
   }
 
-  schowOptionsAfterGame() {}
+  isFalling() {
+    return this.speedY < 0;
+  }
 }

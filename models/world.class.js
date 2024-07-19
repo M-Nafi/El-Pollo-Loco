@@ -36,7 +36,7 @@ class World {
   run() {
     setInterval(() => {
       this.checkCollisions();
-    }, 100);  
+    }, 75);  
     setInterval(() => {
       this.checkThrowObjects();
     }, 200);
@@ -90,7 +90,7 @@ class World {
     });  
    
     this.level.enemies.forEach((enemy) => { 
-      if (this.character.isColliding(enemy) && !enemy.isDead) { 
+      if (this.character.isColliding(enemy) && !enemy.isDead && this.character.isFalling()) { 
         if (enemy instanceof Endboss || 
           !(this.isCharacterAboveEnemy(this.character, enemy) || 
           (this.character.isAboveGround() && this.character.acceleration >= 2))) { 
@@ -109,7 +109,7 @@ class World {
     this.throwableObjects.forEach((bottle) => {
       this.checkCollisionWithEnemies(bottle);
     });
-  }
+  }   
 
   isCharacterAboveEnemy(character, enemy) {
     return character.y + character.height < enemy.y + enemy.height;

@@ -16,6 +16,7 @@ function startGame() {
   startScreen = document.getElementById('start_screen'); 
   mainFont = document.getElementById('main_font'); 
   if (canvas && startScreen) {
+    startLevel();
     world = new World(canvas, keyboard);
     startScreen.classList.add('d-none');  
     canvas.classList.remove('d-none');  
