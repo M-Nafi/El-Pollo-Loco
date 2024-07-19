@@ -41,25 +41,28 @@ class MovableObject extends DrawableObject {
   };
 
   hit() {
-    this.energy -= 20;
-    if (this.energy < 0) {
-      this.energy = 0;
-    } else {
-      this.lastHit = new Date().getTime();
-      if (this instanceof Endboss) {
-        this.hitCount++;
-        this.hurtAnimation();
-        if (this.hitCount == 5) {
-          this.energy = 0;
-          this.isDead = true;
-          this.deadAnimation();
-          if (this instanceof Endboss) {
-            this.handleEndbossIsDeath();
+    if (!this.isHurt()) {
+      this.energy -= 20;
+      if (this.energy < 0) {
+        this.energy = 0;
+      } else {
+        this.lastHit = new Date().getTime();
+        if (this instanceof Endboss) {
+          this.hitCount++;
+          this.hurtAnimation();
+          if (this.hitCount == 5) {
+            this.energy = 0;
+            this.isDead = true;
+            this.deadAnimation();
+            if (this instanceof Endboss) {
+              this.handleEndbossIsDeath();
+            }
           }
         }
       }
     }
   }
+  
   // new date = zeit setzen. vergangene zeit seit 01.01.1970 in ms
 
   isHurt() {

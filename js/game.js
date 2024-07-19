@@ -14,11 +14,12 @@ let gameOver = false;
 function startGame() {  
   canvas = document.getElementById('canvas');
   startScreen = document.getElementById('start_screen'); 
-
+  mainFont = document.getElementById('main_font'); 
   if (canvas && startScreen) {
     world = new World(canvas, keyboard);
     startScreen.classList.add('d-none');  
-    canvas.classList.remove('d-none');    
+    canvas.classList.remove('d-none');  
+    mainFont.classList.remove('d-none');    
   } 
 }
 

@@ -21,7 +21,7 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
-    this.statusBarEndboss.world = this;  // spiel sound stoppen wenn spiel zu ende ist. 
+    this.statusBarEndboss.world = this;  // wichtig! spiel sound stoppen wenn spiel zu ende ist. 
     this.draw();
     this.setWorld();
     this.run();
@@ -36,7 +36,7 @@ class World {
   run() {
     setInterval(() => {
       this.checkCollisions();
-    }, 150);  
+    }, 100);  
     setInterval(() => {
       this.checkThrowObjects();
     }, 200);
