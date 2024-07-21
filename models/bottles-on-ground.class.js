@@ -17,6 +17,9 @@ class Bottles extends MovableObject {
     this.registerAndMuteAudio(this.collectedBottles_sound);
   }
 
+  /**
+   * starts the animation for the bottles on ground
+   */
   bottlesOnGround() {
     setInterval(() => {
       this.playAnimation(this.IMAGES_BOTTLES);
