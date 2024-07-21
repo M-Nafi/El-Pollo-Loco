@@ -16,6 +16,7 @@ class Coins extends MovableObject {
     this.x = 200 + Math.random() * 2000;
     this.y = 130 + Math.random() * 100;   
     this.coinsInAir();
+    this.registerAndMuteAudio(this.collectedCoins_sound);
   }
 
   coinsInAir() {

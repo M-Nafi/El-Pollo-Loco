@@ -137,5 +137,15 @@ h2 {
   }
 }
 
+@media (max-width: 719px) {
+  .game-introducing {
+    flex-wrap: wrap;
+  }
+
+  .start-orientation {
+    width: 100%;
+  }
+}
+
 /* Hintergrundbild von Vecteezy.com */
 /* icons from flaticon.com/free-icons */

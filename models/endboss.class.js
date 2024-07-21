@@ -63,6 +63,8 @@ class Endboss extends MovableObject {
     this.x = 2600;
     this.animate();
     this.speed = 2.5;
+    this.registerAndMuteAudio(this.endBossKilled_sound);
+    this.registerAndMuteAudio(this.win_sound);
   }
 
   increaseSpeed() {

@@ -103,4 +103,11 @@ class MovableObject extends DrawableObject {
   isFalling() {
     return this.speedY < 0;
   }
+
+  registerAndMuteAudio(audio) {
+    window.registerAudio(audio);
+    if (window.isMuted()) {
+        audio.muted = true;
+    }
+}
 }

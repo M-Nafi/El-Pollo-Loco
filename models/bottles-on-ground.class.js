@@ -14,6 +14,7 @@ class Bottles extends MovableObject {
     this.loadImages(this.IMAGES_BOTTLES);
     this.x = 200 + Math.random() * 2000;
     this.bottlesOnGround();
+    this.registerAndMuteAudio(this.collectedBottles_sound);
   }
 
   bottlesOnGround() {
