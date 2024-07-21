@@ -3,30 +3,6 @@ let world;
 let keyboard = new Keyboard();
 let gameOver = false;
 
-// funktion für sound control. muten entmuten 
-document.addEventListener('DOMContentLoaded', () => {
-  let soundOffIcon = document.getElementById('sound_off');
-  let soundOnIcon = document.getElementById('sound_on');
-  let isMuted = false;
-  let allAudios = [];
-
-  let registerAudio = audio => {
-      allAudios.push(audio);
-      audio.muted = isMuted;
-  };
-
-  let toggleMute = () => {
-      isMuted = !isMuted;
-      allAudios.forEach(audio => audio.muted = isMuted);
-      soundOffIcon.classList.toggle('d-none', isMuted);
-      soundOnIcon.classList.toggle('d-none', !isMuted);
-  };
-
-  [soundOffIcon, soundOnIcon].forEach(icon => icon.addEventListener('click', toggleMute));
-  window.registerAudio = registerAudio;
-  window.isMuted = () => isMuted;
-});
-
 function startGame() {
   canvas = document.getElementById('canvas');
   startScreen = document.getElementById('start_screen');
@@ -82,4 +58,28 @@ window.addEventListener('keyup', (e) => {
   if (e.keyCode == 68) {
     keyboard.D = false;
   }
+});
+
+// funktion für sound control. muten entmuten 
+document.addEventListener('DOMContentLoaded', () => {
+  let soundOffIcon = document.getElementById('sound_off');
+  let soundOnIcon = document.getElementById('sound_on');
+  let isMuted = false;
+  let allAudios = [];
+
+  let registerAudio = audio => {
+      allAudios.push(audio);
+      audio.muted = isMuted;
+  };
+
+  let toggleMute = () => {
+      isMuted = !isMuted;
+      allAudios.forEach(audio => audio.muted = isMuted);
+      soundOffIcon.classList.toggle('d-none', isMuted);
+      soundOnIcon.classList.toggle('d-none', !isMuted);
+  };
+
+  [soundOffIcon, soundOnIcon].forEach(icon => icon.addEventListener('click', toggleMute));
+  window.registerAudio = registerAudio;
+  window.isMuted = () => isMuted;
 });
