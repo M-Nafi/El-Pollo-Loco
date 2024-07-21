@@ -20,15 +20,28 @@ class StatusbarEndboss extends DrawableObject {
     this.setPercentage(100);
   }
 
+  /**
+   * sets the percentage of the endboss health and updates the status bar image
+   * pauses the game sound if the percentage drops to 0 or below
+   *
+   * @param {number} percentage - the percentage of the endboss's health
+   * @memberof StatusbarEndboss
+   */
   setPercentage(percentage) {
-    this.percentage = percentage;   
+    this.percentage = percentage;
     let path = this.IMAGES[this.resolveImageIndex()];
     this.img = this.imageCache[path];
     if (percentage <= 0) {
-      this.world.game_sound.pause(); 
+      this.world.game_sound.pause();
     }
   }
 
+  /**
+   * determines the index of the image based on the current percentage
+   *
+   * @returns {number} the index of the image in the images array
+   * @memberof StatusbarEndboss
+   */
   resolveImageIndex() {
     if (this.percentage == 100) {
       return 5;

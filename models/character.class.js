@@ -80,7 +80,7 @@ class Character extends MovableObject {
     this.registerAndMuteAudio(this.hitted_sound);
     this.registerAndMuteAudio(this.snoring_sound);
     this.registerAndMuteAudio(this.gameover_sound);
-  }  
+  }
 
   animate() {
     setInterval(() => {
@@ -194,28 +194,4 @@ class Character extends MovableObject {
       }
     }, 6000);
   }
-
-  // vorschlag von chatgpt
-
-  // handlePepeIsDeath() {
-  //   setTimeout(() => {
-  //     this.helpFunktion1();
-  //     setTimeout(() => {
-  //       this.helpFunction2();
-  //     }, 3000);
-  //   }, 3000);
-  // }
-
-  // helpFunktion1 = () => {
-  //   document.querySelector("canvas").style.display = "none";
-  //   document.getElementById("game_introducing").style.display = "none";
-  //   document.getElementById("restart_game").classList.remove("d-none");
-  //   document.getElementById("game_over_img_1").classList.remove("d-none");
-  // }
-
-  // helpFunction2 = () => {
-  //   document.getElementById("game_over_img_2").classList.remove("d-none");
-  //   document.getElementById("game_over_img_1").style.display = "none";
-  //   this.gameover_sound.pause();
-  // }
 }
