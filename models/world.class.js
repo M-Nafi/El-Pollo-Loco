@@ -166,11 +166,13 @@ class World {
   
   handleBottleCollision(bottle, enemy, index) {
     if (enemy instanceof Endboss || enemy instanceof Chicken || enemy instanceof smallChicken) {
-      bottle.playSplashAnimation(); 
-      this.handleEndbossAfterCollision(enemy, index);
-      bottle.hasHit = true;
+      if (!bottle.hasHit) {
+        bottle.playSplashAnimation(); 
+        this.handleEndbossAfterCollision(enemy, index);
+        bottle.hasHit = true;
+      }
     }
-  }
+  }  
   
   handleEndbossAfterCollision(enemy, index) {
     if (enemy instanceof Endboss) {

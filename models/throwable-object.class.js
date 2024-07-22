@@ -56,7 +56,7 @@ class ThrowableObject extends MovableObject {
     this.playAnimation(this.BOTTLE_SPLASH);
     setTimeout(() => {
       this.deleteFromGame();
-    }, 250);
+    }, 700);
   }
 
   /**
