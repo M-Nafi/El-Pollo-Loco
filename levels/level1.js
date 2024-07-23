@@ -2,17 +2,17 @@ let level1;
 function startLevel() {
   level1 = new Level(
   [
-    new Chicken(),
-    new Chicken(),
-    new Chicken(),
-    new Chicken(),
-    new Chicken(),
-    new smallChicken(),
-    new smallChicken(),
-    new smallChicken(),
-    new smallChicken(),
-    new smallChicken(),
-    new Endboss()
+    // new Chicken(),
+    // new Chicken(),
+    // new Chicken(),
+    // new Chicken(),
+    // new Chicken(),
+    // new smallChicken(),
+    // new smallChicken(),
+    // new smallChicken(),
+    // new smallChicken(),
+    // new smallChicken(),
+    // new Endboss()
   ],
   [
     new Cloud()

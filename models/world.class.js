@@ -15,10 +15,10 @@ class World {
   maxBottles = 5;
   maxCoins = 5;
   coins = new Coins();
-  game_sound = new Audio('audio/main.mp3');
+  game_sound = new Audio("audio/main.mp3");
 
   constructor(canvas, keyboard) {
-    this.ctx = canvas.getContext('2d');
+    this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.statusBarEndboss.world = this; // wichtig! spiel sound stoppen wenn spiel zu ende ist.
@@ -52,10 +52,8 @@ class World {
 
   checkThrowObjects() {
     if (this.keyboard.D && this.collectedBottles > 0) {
-      let bottle = new ThrowableObject(
-        this.character.x + 70,
-        this.character.y + 130
-      );
+      let offsetX = this.character.otherDirection ? -25 : 70;
+      let bottle = new ThrowableObject(this.character.x + offsetX,this.character.y + 130, this);
       this.throwableObjects.push(bottle);
       this.collectedBottles--;
       this.statusBarBottle.setPercentage(this.collectedBottles);
@@ -86,16 +84,16 @@ class World {
       bottle.collectedBottles_sound.play();
       this.statusBarBottle.setPercentage(this.collectedBottles);
     }
-  }  
+  }
 
   checkCharacterCollisions() {
     this.level.bottles.forEach((bottle) => {
       if (this.character.isColliding(bottle)) this.collectBottle(bottle);
-    });  
+    });
     this.level.coins.forEach((coin) => {
       if (this.character.isColliding(coin)) this.collectCoin(coin);
     });
-  
+
     this.level.enemies.forEach((enemy) => {
       if (
         this.character.isColliding(enemy) &&
@@ -108,9 +106,12 @@ class World {
   }
 
   handleEnemyCollision(enemy) {
-    if (enemy instanceof Endboss ||
-      !(this.isCharacterAboveEnemy(this.character, enemy) ||
-        (this.character.isAboveGround() && this.character.acceleration >= 2))
+    if (
+      enemy instanceof Endboss ||
+      !(
+        this.isCharacterAboveEnemy(this.character, enemy) ||
+        (this.character.isAboveGround() && this.character.acceleration >= 2)
+      )
     ) {
       this.character.hit();
       this.statusBar.setPercentage(this.character.energy);
@@ -118,21 +119,21 @@ class World {
       this.hitEnemyFromAbove(enemy);
     }
   }
-  
+
   checkThrowableObjectsCollisions() {
     this.throwableObjects.forEach((bottle) => {
       this.checkCollisionWithEnemies(bottle);
     });
   }
-  
+
   checkCollisions() {
     this.checkCharacterCollisions();
     this.checkThrowableObjectsCollisions();
-  
+
     if (this.character.isDead()) {
       this.game_sound.pause();
     }
-  }  
+  }
 
   isCharacterAboveEnemy(character, enemy) {
     return character.y + character.height < enemy.y + enemy.height;
@@ -162,18 +163,22 @@ class World {
     let timePassed = new Date().getTime() - this.lastHit;
     timePassed = timePassed / 1000;
     return timePassed < 1; // 1 sek immunität nach hit
-  }  
-  
+  }
+
   handleBottleCollision(bottle, enemy, index) {
-    if (enemy instanceof Endboss || enemy instanceof Chicken || enemy instanceof smallChicken) {
+    if (
+      enemy instanceof Endboss ||
+      enemy instanceof Chicken ||
+      enemy instanceof smallChicken
+    ) {
       if (!bottle.hasHit) {
-        bottle.playSplashAnimation(); 
+        bottle.playSplashAnimation();
         this.handleEndbossAfterCollision(enemy, index);
         bottle.hasHit = true;
       }
     }
-  }  
-  
+  }
+
   handleEndbossAfterCollision(enemy, index) {
     if (enemy instanceof Endboss) {
       enemy.hit();
@@ -197,8 +202,6 @@ class World {
       }
     });
   }
-  
-  
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // hiermit wird das vorher eingefügte bild gelöscht, wichtig bei bewegungen

@@ -131,12 +131,7 @@ class Character extends MovableObject {
   longIdle() {
     setInterval(() => {
       let currentTime = new Date().getTime();
-      if (
-        currentTime - this.lastMoveTime > 3000 &&
-        !this.isDead() &&
-        !gameOver
-      ) {
-        //
+      if (currentTime - this.lastMoveTime > 3000 && !this.isDead() && !gameOver) {
         this.playLongIdleAnimation();
         this.snoring_sound.play();
       } else {
