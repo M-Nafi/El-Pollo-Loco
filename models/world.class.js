@@ -15,10 +15,10 @@ class World {
   maxBottles = 5;
   maxCoins = 5;
   coins = new Coins();
-  game_sound = new Audio("audio/main.mp3");
+  game_sound = new Audio('audio/main.mp3');
 
   constructor(canvas, keyboard) {
-    this.ctx = canvas.getContext("2d");
+    this.ctx = canvas.getContext('2d');
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.statusBarEndboss.world = this; // wichtig! spiel sound stoppen wenn spiel zu ende ist.
