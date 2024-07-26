@@ -73,7 +73,7 @@ class Endboss extends MovableObject {
    * @memberof Endboss
    */
   increaseSpeed() {
-    this.speed *= 1.50;
+    this.speed *= 1.5;
   }
 
   /**
@@ -170,13 +170,36 @@ class Endboss extends MovableObject {
   };
 
   /**
-   * handles the end of the game when the end boss is defeated
-   * displays the win screen and relevant UI elements after a delay
+   * handles the death of the endboss
+   * sets the game to over. hides initial elements. starts the endboss death sequence
    *
    * @memberof Endboss
    */
   handleEndbossIsDeath() {
-    gameOver = true;
+    this.gameOver = true;
+    this.hideInitialElements();
+    this.startEndbossDeathSequence();
+  }
+
+  /**
+   * hides initial elmeents when the endboss dies
+   * includes hiding the mobile view bottom and the main font
+   *
+   * @memberof Endboss
+   */
+  hideInitialElements() {
+    document.getElementById('mobile_view_bottom').style.display = 'none';
+    document.getElementById('main_font').style.display = 'none';
+  }
+
+  /**
+   * starts sequence of events that occur when the endboss dies
+   * hiding canvas and game introducing elements
+   * showing the restart game button and the win image. playing the win sound
+   *
+   * @memberof Endboss
+   */
+  startEndbossDeathSequence() {
     let winImage2 = document.getElementById('win_img_2');
     setTimeout(() => {
       document.querySelector('canvas').style.display = 'none';

@@ -163,25 +163,37 @@ class Character extends MovableObject {
     right: 20,
     bottom: 7,
     left: 20,
-  };
+  };  
 
   handlePepeIsDeath() {
-    gameOver = true;
-
+    this.gameOver = true;
+    this.hideInitialElements();
+    this.scheduleGameOverSequence();
+    this.playGameOverSound();
+  }
+  
+  hideInitialElements() {
+    document.getElementById('mobile_view_bottom').style.display = 'none';
+    document.getElementById('main_font').style.display = 'none';
+  }
+  
+  scheduleGameOverSequence() {
     setTimeout(() => {
       document.querySelector('canvas').style.display = 'none';
       document.getElementById('game_introducing').style.display = 'none';
       document.getElementById('restart_game').classList.remove('d-none');
       document.getElementById('game_over_img_1').classList.remove('d-none');
     }, 3000);
-
-    setTimeout(() => {
+  
+    setTimeout(() => {      
       document.getElementById('game_over_img_2').classList.remove('d-none');
       document.getElementById('game_over_img_1').style.display = 'none';
     }, 5000);
-
+  }
+  
+  playGameOverSound() {
     this.gameover_sound.play();
-
+  
     setTimeout(() => {
       if (!this.gameover_sound.paused) {
         this.gameover_sound.pause();

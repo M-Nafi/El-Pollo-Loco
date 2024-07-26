@@ -22,7 +22,7 @@ canvas,
   background-color: black;
   border-radius: 16px;
   box-shadow: 4px 4px 10px 0 rgb(27, 27, 27);
-  display: block;  
+  display: block;
 }
 
 .mobile-view-main {
@@ -61,6 +61,14 @@ canvas,
 .start-btn:hover {
   width: 60px;
   filter: grayscale(0);
+}
+
+.main-font-class {
+  position: absolute;
+  display: flex;
+  width: 720px;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
@@ -150,7 +158,8 @@ h2 {
   .win-img,
   .game-introducing,
   .restart-game-part,
-  .mobile-view-main {
+  .mobile-view-main,
+  .main-font-class {
     width: 100%;
   }
 }
@@ -163,25 +172,20 @@ h2 {
   .win-img,
   .game-introducing,
   .restart-game-part,
-  .mobile-view-main {
+  .mobile-view-main,
+  .main-font-class {
     height: 100vh;
   }
 }
 
 /* Mobile-View */
 @media (max-width: 719px) {
-.canvas-relative {
-  position: relative;
-}
+  .canvas-relative {
+    position: relative;
+  }
 
-.relative-div {  
-  /* width: 720px;
-  height: 480px; */
-  position: relative;
-}
-
-  .main-font {
-    display: none;
+  .relative-div {
+    position: relative;
   }
 
   .game-introducing {
@@ -193,13 +197,37 @@ h2 {
     width: 100%;
   }
 
-  .mobile-view-main {    
+  .restart-game-part {
+    position: absolute;
+    flex-direction: row;
+    display: flex;
+    height: 475px;
+    align-content: flex-end;    
+  }
+
+  .game-instructions-right, .game-instructions-left {
+    display: none;    
+  }
+
+  .restart-icon {
+    filter: none;
+    width: 50px;      
+  }
+
+  h2 {
+    padding-bottom: 16px;
+  }
+
+  .restart-icon:hover {
+    width: 50px;
+  }
+
+  .mobile-view-main {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: absolute;   
+    position: absolute;
     z-index: 1;
-    /* height: 480px; */  
     bottom: 10px;
     left: 0px;
     right: 0px;
@@ -207,7 +235,7 @@ h2 {
 
   .mobile-view-top {
     display: flex;
-    justify-content: center;   
+    justify-content: center;
   }
 
   .mobile-view-bottom {
@@ -235,8 +263,14 @@ h2 {
     gap: 16px;
   }
 
-  .restart-game-part {
+  /* .restart-game-part {
     display: none;
+  } */
+}
+
+@media (max-width: 520px) {
+  h1 {
+    font-size: 25px;
   }
 }
 

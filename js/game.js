@@ -71,7 +71,7 @@ window.addEventListener('keyup', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
   let soundOffIcon = document.getElementById('sound_off');
   let soundOnIcon = document.getElementById('sound_on');
-  let isMuted = false;
+  let isMuted = true; 
   let allAudios = [];
 
   let registerAudio = audio => {
@@ -82,11 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
   let toggleMute = () => {
       isMuted = !isMuted;
       allAudios.forEach(audio => audio.muted = isMuted);
-      soundOffIcon.classList.toggle('d-none', isMuted);
-      soundOnIcon.classList.toggle('d-none', !isMuted);
+      soundOffIcon.classList.toggle('d-none', !isMuted);
+      soundOnIcon.classList.toggle('d-none', isMuted);
   };
 
   [soundOffIcon, soundOnIcon].forEach(icon => icon.addEventListener('click', toggleMute));
   window.registerAudio = registerAudio;
   window.isMuted = () => isMuted;
+  
+  soundOffIcon.classList.remove('d-none');
+  soundOnIcon.classList.add('d-none');
 });
