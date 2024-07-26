@@ -13,6 +13,7 @@ function startGame() {
     startScreen.classList.add('d-none');
     canvas.classList.remove('d-none');
     mainFont.classList.remove('d-none');
+    mobileGameControl();   
   }
 }
 
@@ -27,6 +28,12 @@ function restartGame() {
   gameIntroducing.style.display = '';
   restartGame.classList.add('d-none');
   location.reload();
+  mobileGameControl();
+}
+
+function mobileGameControl() {
+  let controlIcons = document.getElementById('mobile_view');
+  controlIcons.classList.remove('d-none');
 }
 
 window.addEventListener('keydown', (e) => {
