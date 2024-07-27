@@ -34,6 +34,46 @@ function restartGame() {
 function mobileGameControl() {
   let controlIcons = document.getElementById('mobile_view');
   controlIcons.classList.remove('d-none');
+
+  document.getElementById('move_left').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.LEFT = true;
+  });
+
+  document.getElementById('move_left').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keyboard.LEFT = false;
+  });
+
+  document.getElementById('move_right').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = true;
+  });
+
+  document.getElementById('move_right').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keyboard.RIGHT = false;
+  });
+
+  document.getElementById('jump').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.SPACE = true; 
+  });
+
+  document.getElementById('jump').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keyboard.SPACE = false; 
+  });
+
+  document.getElementById('throw_bottle').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    keyboard.D = true; 
+  });
+
+  document.getElementById('throw_bottle').addEventListener('touchend', (e) => {
+    e.preventDefault();
+    keyboard.D = false; 
+  });
 }
 
 window.addEventListener('keydown', (e) => {
@@ -67,7 +107,7 @@ window.addEventListener('keyup', (e) => {
   }
 });
 
-// funktion für sound control. muten entmuten 
+// Funktion für Sound Control. Muten/Entmuten
 document.addEventListener('DOMContentLoaded', () => {
   let soundOffIcon = document.getElementById('sound_off');
   let soundOnIcon = document.getElementById('sound_on');
