@@ -163,6 +163,10 @@ h2 {
   .main-font-class {
     width: 100%;
   }
+
+  .main-font-class {
+    display: none;
+  }
 }
 
 /* smartphones ---------------*/
@@ -178,14 +182,14 @@ h2 {
   .main-font-class {
     height: 100vh;
   }
+
+  .main-font-class {
+    display: none;
+  }
 }
 
 /* Mobile-View */
 @media (max-width: 719px) {
-  .main-font-class {
-    display: none;
-  }
-
   .canvas-relative {
     position: relative;
   }
@@ -207,8 +211,9 @@ h2 {
     position: absolute;
     flex-direction: row;
     display: flex;
-    height: 475px;
+    height: 350px;
     align-content: flex-end;
+    box-shadow: none;
   }
 
   .game-instructions-right,
