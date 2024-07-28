@@ -121,28 +121,29 @@ window.addEventListener('keyup', (e) => {
 /**
  * sets up game sound control in total for muting and unmuting
  */
-document.addEventListener('DOMContentLoaded', () => {
+function setupSoundControl() {
   let soundOffIcon = document.getElementById('sound_off');
   let soundOnIcon = document.getElementById('sound_on');
   let isMuted = true; 
   let allAudios = [];
-
   let registerAudio = audio => {
-      allAudios.push(audio);
-      audio.muted = isMuted;
+    allAudios.push(audio);
+    audio.muted = isMuted;
   };
-
   let toggleMute = () => {
-      isMuted = !isMuted;
-      allAudios.forEach(audio => audio.muted = isMuted);
-      soundOffIcon.classList.toggle('d-none', !isMuted);
-      soundOnIcon.classList.toggle('d-none', isMuted);
+    isMuted = !isMuted;
+    allAudios.forEach(audio => audio.muted = isMuted);
+    soundOffIcon.classList.toggle('d-none', !isMuted);
+    soundOnIcon.classList.toggle('d-none', isMuted);
   };
 
   [soundOffIcon, soundOnIcon].forEach(icon => icon.addEventListener('click', toggleMute));
   window.registerAudio = registerAudio;
-  window.isMuted = () => isMuted;
-  
+  window.isMuted = () => isMuted;  
   soundOffIcon.classList.remove('d-none');
   soundOnIcon.classList.add('d-none');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setupSoundControl();
 });
