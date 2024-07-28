@@ -3,6 +3,10 @@ let world;
 let keyboard = new Keyboard();
 let gameOver = false;
 
+function handleGameOver() {
+  gameOver = true;
+}
+
 /**
  * initializes world and starts the game
  */

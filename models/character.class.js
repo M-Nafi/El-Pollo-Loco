@@ -136,6 +136,7 @@ class Character extends MovableObject {
         this.snoring_sound.play();
       } else {
         this.snoring_sound.pause();
+        this.snoring_sound.currentTime = 0; // Stelle sicher, dass der Sound zurückgesetzt wird
       }
     }, 1500);
   }
