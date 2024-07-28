@@ -73,7 +73,7 @@ class Endboss extends MovableObject {
    * @memberof Endboss
    */
   increaseSpeed() {
-    this.speed *= 1.5;
+    this.speed *= 1.7;
   }
 
   /**
@@ -188,7 +188,7 @@ class Endboss extends MovableObject {
    * @memberof Endboss
    */
   hideInitialElements() {
-    document.getElementById('mobile_view_bottom').style.display = 'none';
+    document.getElementById('mobile_view').style.display = 'none';
     document.getElementById('main_font').style.display = 'none';
   }
 

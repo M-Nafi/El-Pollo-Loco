@@ -173,7 +173,7 @@ class Character extends MovableObject {
   }
   
   hideInitialElements() {
-    document.getElementById('mobile_view_bottom').style.display = 'none';
+    document.getElementById('mobile_view').style.display = 'none';
     document.getElementById('main_font').style.display = 'none';
   }
   

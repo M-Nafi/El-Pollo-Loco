@@ -95,24 +95,15 @@ class World {
     });
 
     this.level.enemies.forEach((enemy) => {
-      if (
-        this.character.isColliding(enemy) &&
-        !enemy.isDead &&
-        this.character.isFalling()
-      ) {
+      if (this.character.isColliding(enemy) && !enemy.isDead && this.character.isFalling()) {
         this.handleEnemyCollision(enemy);
       }
     });
   }
 
   handleEnemyCollision(enemy) {
-    if (
-      enemy instanceof Endboss ||
-      !(
-        this.isCharacterAboveEnemy(this.character, enemy) ||
-        (this.character.isAboveGround() && this.character.acceleration >= 2)
-      )
-    ) {
+    if (enemy instanceof Endboss || !(this.isCharacterAboveEnemy(this.character, enemy) ||
+        (this.character.isAboveGround() && this.character.acceleration >= 2) ) ) {
       this.character.hit();
       this.statusBar.setPercentage(this.character.energy);
     } else if (this.isCharacterAboveEnemy(this.character, enemy)) {
@@ -166,11 +157,7 @@ class World {
   }
 
   handleBottleCollision(bottle, enemy, index) {
-    if (
-      enemy instanceof Endboss ||
-      enemy instanceof Chicken ||
-      enemy instanceof smallChicken
-    ) {
+    if (enemy instanceof Endboss || enemy instanceof Chicken || enemy instanceof smallChicken) {
       if (!bottle.hasHit) {
         bottle.playSplashAnimation();
         this.handleEndbossAfterCollision(enemy, index);
@@ -223,9 +210,7 @@ class World {
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.throwableObjects);
-
     this.ctx.translate(-this.camera_x, 0);
-
     // draw() wird immer wieder aufgerufen
     let self = this;
     requestAnimationFrame(function () {
@@ -240,13 +225,11 @@ class World {
   }
 
   addToMap(mo) {
-    if (mo.otherDirection) {
-      // checken ob character eine andere ricvhtung hat
+    if (mo.otherDirection) { // checken ob character eine andere ricvhtung hat
       this.flipImage(mo);
     }
     mo.draw(this.ctx);
     mo.drawFrame(this.ctx);
-
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }

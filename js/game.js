@@ -3,6 +3,9 @@ let world;
 let keyboard = new Keyboard();
 let gameOver = false;
 
+/**
+ * initializes world and starts the game
+ */
 function startGame() {
   canvas = document.getElementById('canvas');
   startScreen = document.getElementById('start_screen');
@@ -17,6 +20,9 @@ function startGame() {
   }
 }
 
+/**
+ * restarts the game and show relevant elements
+ */
 function restartGame() {
   let canvas = document.querySelector('canvas');
   let gameOverImage2 = document.getElementById('game_over_img_2');
@@ -31,6 +37,9 @@ function restartGame() {
   mobileGameControl();
 }
 
+/**
+ * sets up mobile game controls
+ */
 function mobileGameControl() {
   let controlIcons = document.getElementById('mobile_view');
   controlIcons.classList.remove('d-none');
@@ -76,8 +85,10 @@ function mobileGameControl() {
   });
 }
 
-window.addEventListener('keydown', (e) => {
-  // console.log(e.keyCode);  // hiermit kann man tastencode auslesen in der konsole
+/**
+ * sets up keyboard controls for desktop
+ */
+window.addEventListener('keydown', (e) => {  
   if (e.keyCode == 39) {
     keyboard.RIGHT = true;
   }
@@ -107,7 +118,9 @@ window.addEventListener('keyup', (e) => {
   }
 });
 
-// Funktion für Sound Control. Muten/Entmuten
+/**
+ * sets up game sound control in total for muting and unmuting
+ */
 document.addEventListener('DOMContentLoaded', () => {
   let soundOffIcon = document.getElementById('sound_off');
   let soundOnIcon = document.getElementById('sound_on');
