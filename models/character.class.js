@@ -229,6 +229,7 @@ class Character extends MovableObject {
    * @memberOf Character
    */
   hideGameElements() {
+    document.getElementById('mobile_view').style.display = 'none';
     setTimeout(() => {
       document.querySelector('canvas').style.display = 'none';
       document.getElementById('game_introducing').style.display = 'none';
