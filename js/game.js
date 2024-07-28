@@ -3,6 +3,9 @@ let world;
 let keyboard = new Keyboard();
 let gameOver = false;
 
+/**
+ * sets the gameover (boolean-flag) to true
+ */
 function handleGameOver() {
   gameOver = true;
 }

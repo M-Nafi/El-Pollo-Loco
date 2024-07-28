@@ -271,11 +271,10 @@ p {
     position: absolute;
     height: 100vh;
     display: flex;
-    align-content: flex-end;
-    /* padding-bottom: 50px; */
+    align-content: flex-end;    
     flex-direction: row;
     box-shadow: none;
-    height: 400px;
+    height: 370px;
   }
 
   .game-instructions-right,
