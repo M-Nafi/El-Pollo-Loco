@@ -23,7 +23,7 @@ class Statusbar extends DrawableObject {
   /**
    * sets the percentage of the health status and updates the status bar image
    *
-   * @param {number} percentage - the percentage of the health status
+   * @param {number} percentage 
    * @memberof Statusbar
    */
   setPercentage(percentage) {
@@ -35,7 +35,7 @@ class Statusbar extends DrawableObject {
   /**
    * determines the index of the image based on the current percentage
    *
-   * @returns {number} the index of the image in the images array
+   * @returns {number} 
    * @memberof Statusbar
    */
   resolveImageIndex() {

@@ -80,104 +80,74 @@ class Character extends MovableObject {
     this.registerAndMuteAudio(this.hitted_sound);
     this.registerAndMuteAudio(this.snoring_sound);
     this.registerAndMuteAudio(this.gameover_sound);
-  }  
+  }
 
   /**
-   * updates movement and animations for the object
-   *
-   * @memberof Character
+   * starts animation loops for movement, jumping, camera updates, and character animations
+   * 
+   * @memberOf Character
    */
   animate() {
-    this.updateMovement();
-    this.updateAnimations();
-  }
-
-  /**
-   * updates movement of the object including handling horizontal movement and jumping
-   * updates the camera position relative to the object's position
-   *
-   * @memberof Character
-   */
-  updateMovement() {
     setInterval(() => {
-      this.handleMovement();
-      this.world.camera_x = -this.x + 75;
+      this.handleCharacterMove();
+      this.handleCharacterJump();
+      this.updateCamera();
     }, 1000 / 60);
+    setInterval(() => {
+      this.updateCharacterAnimations();
+    }, 50);
   }
 
   /**
-   * Handles movement logic including horizontal movement and jumping
-   *
-   * @memberof Character
+   * handles character movement based on using keyboard and plays the walking sound
+   * 
+   * @memberOf Character
    */
-  handleMovement() {
-    this.handleHorizontalMovement();
-    this.handleJump();
-    this.lastMoveTime = new Date().getTime();
-  }
-
-  /**
-   * manages horizontal movement based on keyboard input
-   * plays walking sound when character is moving
-   *
-   * @memberof Character
-   */
-  handleHorizontalMovement() {
+  handleCharacterMove() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
       this.otherDirection = false;
-      this.playWalkingSound();
+      if (!this.isAboveGround()) this.walking_sound.play();
+      this.lastMoveTime = new Date().getTime();
     } else if (this.world.keyboard.LEFT && this.x > -500) {
       this.moveLeft();
       this.otherDirection = true;
-      this.playWalkingSound();
+      if (!this.isAboveGround()) this.walking_sound.play();
+      this.lastMoveTime = new Date().getTime();
     } else {
       this.walking_sound.pause();
     }
   }
 
   /**
-   * handles jumping logic based on keyboard input
-   * plays jumping sound when character is jumping
-   *
-   * @memberof Character
+   * handles character jumping based on using keyboard and plays the jumping sound
+   * 
+   * @memberOf Character
    */
-  handleJump() {
+  handleCharacterJump() {
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
       this.jump();
       this.walking_sound.pause();
       this.jumping_sound.play();
+      this.lastMoveTime = new Date().getTime();
     }
   }
 
   /**
-   * plays walking sound when character is on ground
-   *
-   *  @memberof Character
+   * updates the camera position based on the character's x position
+   * 
+   * @memberOf Character
    */
-  playWalkingSound() {
-    if (!this.isAboveGround()) {
-      this.walking_sound.play();
-    }
+  updateCamera() {
+    this.world.camera_x = -this.x + 75;
   }
 
   /**
-   * updates the animation based on its state
-   *
-   * @memberof Character
+   * updates character animations based on its current state if dead, hurt, jumping or walking
+   * 
+   * @memberOf Character
    */
-  updateAnimations() {
-    setInterval(() => {
-      this.playCurrentAnimation();
-    }, 50);
-  }
-
-  /**
-   * plays appropriate animation based on characters current state
-   *
-   * @memberof Character
-   */
-  playCurrentAnimation() {
+  updateCharacterAnimations() {
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
     } else if (this.isHurt()) {
@@ -185,15 +155,17 @@ class Character extends MovableObject {
       this.hitted_sound.play();
     } else if (this.isAboveGround()) {
       this.playAnimation(this.IMAGES_JUMPING);
-    } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-      this.playAnimation(this.IMAGES_WALKING);
+    } else {
+      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        this.playAnimation(this.IMAGES_WALKING);
+      }
     }
   }
 
   /**
-   * manages characters long idle state and plays the snoring sound
-   *
-   * @memberof Character
+   * manages the long idle animation and plays the snoring sound if the character is idle for 3 sekonds
+   * 
+   * @memberOf Character
    */
   longIdle() {
     setInterval(() => {
@@ -203,15 +175,14 @@ class Character extends MovableObject {
         this.snoring_sound.play();
       } else {
         this.snoring_sound.pause();
-        this.snoring_sound.currentTime = 0;
       }
     }, 1500);
   }
 
   /**
-   * plays long idle animation and handles the interruption when movement is detected
-   *
-   * @memberof Character
+   * plays the long idle animation when the character is idle for an extended period
+   * 
+   * @memberOf Character
    */
   playLongIdleAnimation() {
     let longIdleInterval = setInterval(() => {
@@ -230,7 +201,7 @@ class Character extends MovableObject {
   }
 
   /**
-   * Defines the object's hitbox offsets.
+   * defines the offset values for the object
    *
    * @memberof Character
    */
@@ -242,40 +213,37 @@ class Character extends MovableObject {
   };
 
   /**
-   * handles game over state including hiding elements and playing the game over sound
-   *
-   * @memberof Character
+   * handles gameover sequence including hiding game elements and displaying gameover images
+   * @memberOf Character
    */
   handlePepeIsDeath() {
-    this.gameOver = true;
-    this.hideInitialElements();
-    this.scheduleGameOverSequence();
-    this.playGameOverSound();
+    gameOver = true;
+    this.hideGameElements();
+    this.showGameOverImages();
+    this.handleGameOverSound();
   }
 
   /**
-   * hides intial game elements after game over
-   *
-   * @memberof Character
+   * hides the game elements and displays the initial gameover screen elements
+   * 
+   * @memberOf Character
    */
-  hideInitialElements() {
-    document.getElementById('mobile_view').style.display = 'none';
-    document.getElementById('main_font').style.display = 'none';
-  }
-
-  /**
-   * schedules the display of game over screens and shows option
-   *
-   * @memberof Character
-   */
-  scheduleGameOverSequence() {
+  hideGameElements() {
     setTimeout(() => {
       document.querySelector('canvas').style.display = 'none';
       document.getElementById('game_introducing').style.display = 'none';
       document.getElementById('restart_game').classList.remove('d-none');
       document.getElementById('game_over_img_1').classList.remove('d-none');
+      document.getElementById('main_font').style.display = 'none';
     }, 3000);
+  }
 
+  /**
+   * displays gameover image and hides the first one
+   * 
+   * @memberOf Character
+   */
+  showGameOverImages() {
     setTimeout(() => {
       document.getElementById('game_over_img_2').classList.remove('d-none');
       document.getElementById('game_over_img_1').style.display = 'none';
@@ -283,11 +251,11 @@ class Character extends MovableObject {
   }
 
   /**
-   * plays the game over sound and stops it after 6 seconds
-   *
-   * @memberof Character
+   * plays and then stops the gameover sound
+   * 
+   * @memberOf Character
    */
-  playGameOverSound() {
+  handleGameOverSound() {
     this.gameover_sound.play();
     setTimeout(() => {
       if (!this.gameover_sound.paused) {

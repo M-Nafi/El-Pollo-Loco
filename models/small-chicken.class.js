@@ -10,7 +10,9 @@ class smallChicken extends MovableObject {
     'img/3_enemies_chicken/chicken_small/1_walk/3_w.png',
   ];
 
-  IMAGES_DEAD = ['img/3_enemies_chicken/chicken_small/2_dead/dead.png'];
+  IMAGES_DEAD = [
+    'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
+  ];
 
   constructor() {
     super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
@@ -32,8 +34,8 @@ class smallChicken extends MovableObject {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       } else {
-        this.y = 375; // setzten der höhe wieder auf die ursprüngliche position
-        this.speedY = 0; // stoppt die bewegung nach unten
+        this.y = 375; 
+        this.speedY = 0; 
       }
     }, 1000 / 25);
   }
@@ -41,11 +43,11 @@ class smallChicken extends MovableObject {
   /**
    * checks if the object is above the ground
    *
-   * @returns {boolean} true if above the ground, false otherwise
+   * @returns {boolean}
    * @memberof smallChicken
    */
   isAboveGround() {
-    return this.y < 375; // 375 notwendig da mov.obj anders und chicken sonst auf anderer höhe.
+    return this.y < 375;
   }
 
   /**
@@ -59,13 +61,11 @@ class smallChicken extends MovableObject {
         this.moveLeft();
       }
     }, 1000 / 60);
-
     setInterval(() => {
       if (!this.isDead) {
         this.playAnimation(this.IMAGES_WALKING);
       }
     }, 150);
-
     setInterval(() => {
       if (!this.isDead) {
         this.jump();

@@ -23,7 +23,7 @@ class StatusbarCoin extends DrawableObject {
   /**
    * sets the percentage of collected coins and updates the status bar image
    *
-   * @param {number} percentage - percentage of collected coins
+   * @param {number} percentage 
    * @memberof StatusbarCoin
    */
   setPercentage(percentage) {
@@ -35,7 +35,7 @@ class StatusbarCoin extends DrawableObject {
   /**
    * determines the index of the image based on the current percentage
    *
-   * @returns {number} index of the image in the images array
+   * @returns {number} 
    * @memberof StatusbarCoin
    */
   resolveImageIndex() {

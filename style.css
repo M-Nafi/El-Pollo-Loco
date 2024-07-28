@@ -71,8 +71,7 @@ canvas,
   align-items: center;
 }
 
-h1 {
-  /* font-size: 60px; */
+h1 { 
   font-weight: 100;
   border-radius: 16px;
   box-shadow: 4px 4px 10px 0 rgb(27, 27, 27);

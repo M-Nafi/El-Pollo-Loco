@@ -30,15 +30,29 @@ class ThrowableObject extends MovableObject {
   }
 
   /**
-   * initiates throwing motion with gravity and animation
-   * direction of throw determined by character's facing direction
+   * starts the throw action and sets up the interval
    *
    * @memberof ThrowableObject
    */
   throw() {
     this.speedY = 22;
     this.applyGravity();
-    let direction = this.world.character.otherDirection ? -1 : 1;
+    let direction;
+    if (this.world.character.otherDirection) {
+      direction = -1;
+    } else {
+      direction = 1;
+    }
+    this.startThrowInterval(direction);
+  }
+
+  /**
+   * sets up the interval for the throw action
+   *
+   * @param {number} direction
+   * @memberof ThrowableObject
+   */
+  startThrowInterval(direction) {
     this.throwInterval = setInterval(() => {
       this.x += 13 * direction;
       this.playAnimation(this.BOTTLE_ROTATION);

@@ -5,7 +5,10 @@ class Coins extends MovableObject {
   x = 500;
   collectedCoins_sound = new Audio('audio/coin.mp3');
 
-  IMAGES_COINS = ['img/8_coin/coin_1.png', 'img/8_coin/coin_2.png'];
+  IMAGES_COINS = [
+    'img/8_coin/coin_1.png', 
+    'img/8_coin/coin_2.png'
+  ];
 
   constructor() {
     super().loadImage(this.IMAGES_COINS[0]);
@@ -19,7 +22,7 @@ class Coins extends MovableObject {
   /**
    * plays the coin animation at regular intervals
    *
-   * @memberof Chicken
+   * @memberof Coins
    */
   coinsInAir() {
     setInterval(() => {
@@ -28,10 +31,9 @@ class Coins extends MovableObject {
   }
 
   /**
-   * defines the offset values for the object
+   * defines the offset values for the object   *
    *
-   *
-   * @memberof Chicken
+   * @memberof Coins
    */
   offset = {
     top: 30,

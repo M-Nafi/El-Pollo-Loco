@@ -21,7 +21,7 @@ class StatusbarBottle extends DrawableObject {
   /**
    * sets the percentage of collected bottles and updates the status bar image
    *
-   * @param {number} collectedBottles - the number of collected bottles
+   * @param {number} collectedBottles 
    * @memberof StatusbarBottle
    */
   setPercentage(collectedBottles) {
@@ -34,7 +34,7 @@ class StatusbarBottle extends DrawableObject {
   /**
    * determines the index of the image based on the current percentage
    *
-   * @returns {number} the index of the image in the images array
+   * @returns {number} 
    * @memberof StatusbarBottle
    */
   resolveImageIndex() {

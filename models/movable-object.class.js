@@ -64,33 +64,64 @@ class MovableObject extends DrawableObject {
   };
 
   /**
-   * reduces the object's energy and handles death if energy falls to zero
+   * reduces the object's energy and handles hit effects
    *
    * @memberof MovableObject
    */
   hit() {
     if (!this.isHurt()) {
-      this.energy -= 20;
-      if (this.energy < 0) {
+      this.reduceEnergy();
+      this.handleHitEffects();
+    }
+  }
+
+  /**
+   * reduces the object's energy by 20% ensuring it does not fall below 0
+   *
+   * @memberof MovableObject
+   */
+  reduceEnergy() {
+    this.energy -= 20;
+    if (this.energy < 0) {
+      this.energy = 0;
+    }
+  }
+
+  /**
+   * handles effects when the object is hit including setting the last hit time
+   * triggering specific effects if the object's energy is depleted
+   *
+   * @memberof MovableObject
+   */
+  handleHitEffects() {
+    if (this.energy > 0) {
+      this.lastHit = new Date().getTime();
+      this.checkForEndbossEffects();
+    } else if (this instanceof Endboss) {
+      this.isDead = true;
+      this.deadAnimation();
+      this.handleEndbossIsDeath();
+    }
+  }
+
+  /**
+   * checks for specific effects if the object is an endboss and handles endboss specific
+   * behaviors, including incrementing the hit count and triggering death effects if needed
+   *
+   * @memberof MovableObject
+   */
+  checkForEndbossEffects() {
+    if (this instanceof Endboss) {
+      this.hitCount++;
+      this.hurtAnimation();
+      if (this.hitCount >= 5) {
         this.energy = 0;
-      } else {
-        this.lastHit = new Date().getTime();
-        if (this instanceof Endboss) {
-          this.hitCount++;
-          this.hurtAnimation();
-          if (this.hitCount == 5) {
-            this.energy = 0;
-            this.isDead = true;
-            this.deadAnimation();
-            if (this instanceof Endboss) {
-              this.handleEndbossIsDeath();
-            }
-          }
-        }
+        this.isDead = true;
+        this.deadAnimation();
+        this.handleEndbossIsDeath();
       }
     }
   }
-  // new date = zeit setzen. vergangene zeit seit 01.01.1970 in ms
 
   /**
    * checks if the object has been recently hurt
@@ -127,8 +158,7 @@ class MovableObject extends DrawableObject {
    * @memberof MovableObject
    */
   playAnimation(images) {
-    let i = this.currentImage % images.length; // i = ist aufgrund der modulo (& bzw. ist der rest...) die reihenfolge von images walking in der unendlich schleife
-    // praktisch sieht das so aus: i = 0, 1, 2, 3, 4, 5 und dann nicht 6 sondern wieder von vorne 0, 1, 2 usw...
+    let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imageCache[path];
     this.currentImage++;

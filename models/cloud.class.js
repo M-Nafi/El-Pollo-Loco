@@ -8,10 +8,11 @@ class Cloud extends MovableObject {
     this.x = Math.random() * 1440;
     this.animate();
   }
+  
   /**
    * continuously moves the object to the left and calls itself on the next animation frame
    *
-   * @memberof Chicken
+   * @memberof Cloud
    */
   animate() {
     this.moveLeft();

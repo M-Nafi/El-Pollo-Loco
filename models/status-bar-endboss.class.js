@@ -24,7 +24,7 @@ class StatusbarEndboss extends DrawableObject {
    * sets the percentage of the endboss health and updates the status bar image
    * pauses the game sound if the percentage drops to 0 or below
    *
-   * @param {number} percentage - the percentage of the endboss's health
+   * @param {number} percentage
    * @memberof StatusbarEndboss
    */
   setPercentage(percentage) {
@@ -39,7 +39,7 @@ class StatusbarEndboss extends DrawableObject {
   /**
    * determines the index of the image based on the current percentage
    *
-   * @returns {number} the index of the image in the images array
+   * @returns {number} 
    * @memberof StatusbarEndboss
    */
   resolveImageIndex() {

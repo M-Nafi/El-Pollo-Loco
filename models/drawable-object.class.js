@@ -11,8 +11,7 @@ class DrawableObject {
    * loads an image from specified path and assigns it to the img property
    *
    * @param {string} path - path to image file
-   *
-   * @memberof Chicken
+   * @memberof DrawableObject
    */
   loadImage(path) {
     this.img = new Image(); // ist das gleiche wie document.getElementById('image')...
@@ -22,9 +21,8 @@ class DrawableObject {
   /**
    * draws the object on given canvas context
    *
-   * @param {CanvasRenderingContext2D} ctx - the canvas rendering context
-   *
-   * @memberof Chicken
+   * @param {CanvasRenderingContext2D} ctx
+   * @memberof DrawableObject
    */
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -33,30 +31,25 @@ class DrawableObject {
   /**
    * draws a frame around the object on given canvas context
    *
-   * @param {CanvasRenderingContext2D} ctx - the canvas rendering context
-   *
-   * @memberof Chicken
+   * @param {CanvasRenderingContext2D} ctx
+   * @memberof DrawableObject
    */
   drawFrame(ctx) {
     ctx.beginPath();
-    ctx.lineWidth = '1';
-    ctx.strokeStyle = 'white';
-
-    if (
-      this instanceof Character ||
-      this instanceof Endboss ||
-      this instanceof Bottles ||
-      this instanceof Coins ||
-      this instanceof Chicken ||
-      this instanceof smallChicken
-    ) {
-      ctx.rect(
-        this.x + this.offset.left,
-        this.y + this.offset.top,
-        this.width - this.offset.left - this.offset.right,
-        this.height - this.offset.top - this.offset.bottom
-      );
-    }
+    // ctx.lineWidth = '1';
+    // ctx.strokeStyle = 'white';
+    // if (this instanceof Character ||
+    //     this instanceof Endboss ||
+    //     this instanceof Bottles ||
+    //     this instanceof Coins ||
+    //     this instanceof Chicken ||
+    //     this instanceof smallChicken) {
+    //   ctx.rect(
+    //     this.x + this.offset.left, this.y + this.offset.top,
+    //     this.width - this.offset.left - this.offset.right,
+    //     this.height - this.offset.top - this.offset.bottom
+    //   );
+    // }
     ctx.stroke();
   }
 
@@ -64,8 +57,7 @@ class DrawableObject {
    * loads multiple images from the specified array of paths and caches them
    *
    * @param {string[]} arr - array of image file paths
-   *
-   * @memberof Chicken
+   * @memberof DrawableObject
    */
   loadImages(arr) {
     arr.forEach((path) => {
