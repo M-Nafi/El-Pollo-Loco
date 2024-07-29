@@ -23,7 +23,8 @@ function startGame() {
     startScreen.classList.add('d-none');
     canvas.classList.remove('d-none');
     mainFont.classList.remove('d-none');
-    mobileGameControl();   
+    mobGameCntrlLeftHand();   
+    mobGameCntrlRightHand();
   }
 }
 
@@ -41,21 +42,28 @@ function restartGame() {
   gameIntroducing.style.display = '';
   restartGame.classList.add('d-none');
   location.reload();
-  mobileGameControl();
+  mobGameCntrlLeftHand();
+  mobGameCntrlRightHand();
+}
+
+/**
+ * 
+ */
+function definitionOfControlIcons() {
+  let controlIcons = document.getElementById('mobile_view');
+  controlIcons.classList.remove('d-none');
 }
 
 /**
  * sets up mobile game controls
  */
-function mobileGameControl() {
-  let controlIcons = document.getElementById('mobile_view');
-  controlIcons.classList.remove('d-none');
+function mobGameCntrlLeftHand() {
+  definitionOfControlIcons();
 
   document.getElementById('move_left').addEventListener('touchstart', (e) => {
     e.preventDefault();
     keyboard.LEFT = true;
   });
-
   document.getElementById('move_left').addEventListener('touchend', (e) => {
     e.preventDefault();
     keyboard.LEFT = false;
@@ -65,12 +73,18 @@ function mobileGameControl() {
     e.preventDefault();
     keyboard.RIGHT = true;
   });
-
   document.getElementById('move_right').addEventListener('touchend', (e) => {
     e.preventDefault();
     keyboard.RIGHT = false;
   });
+}
 
+/**
+ * sets up mobile game controls
+ */
+function mobGameCntrlRightHand() {
+  definitionOfControlIcons();
+  
   document.getElementById('jump').addEventListener('touchstart', (e) => {
     e.preventDefault();
     keyboard.SPACE = true; 

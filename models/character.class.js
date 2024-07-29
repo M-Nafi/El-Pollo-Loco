@@ -186,18 +186,27 @@ class Character extends MovableObject {
    */
   playLongIdleAnimation() {
     let longIdleInterval = setInterval(() => {
-      if (this.world.keyboard.LEFT ||
-          this.world.keyboard.RIGHT ||
-          this.world.keyboard.SPACE ||
-          this.world.keyboard.D) {
+      if (this.anyKeyPressed()) {
         clearInterval(longIdleInterval);
         this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
         this.snoring_sound.pause();
-        this.lastMoveTime = new Date().getTime();
-        return;
+        this.lastMoveTime = new Date().getTime();       
       }
       this.playAnimation(this.IMAGES_LONGIDLE);
     }, 1000);
+  }
+
+  /**
+   * Checks if any of the specified keys (LEFT, RIGHT, SPACE, D) is pressed.
+   * 
+   * @returns {boolean}
+   * @memberOf Character
+   */
+  anyKeyPressed() {
+    return this.world.keyboard.LEFT ||
+           this.world.keyboard.RIGHT ||
+           this.world.keyboard.SPACE ||
+           this.world.keyboard.D;
   }
 
   /**
