@@ -10,11 +10,11 @@ class DrawableObject {
   /**
    * loads an image from specified path and assigns it to the img property
    *
-   * @param {string} path - path to image file
+   * @param {string} path 
    * @memberof DrawableObject
    */
   loadImage(path) {
-    this.img = new Image(); // ist das gleiche wie document.getElementById('image')...
+    this.img = new Image(); 
     this.img.src = path;
   }
 
@@ -36,27 +36,13 @@ class DrawableObject {
    */
   drawFrame(ctx) {
     ctx.beginPath();
-    // ctx.lineWidth = '1';
-    // ctx.strokeStyle = 'white';
-    // if (this instanceof Character ||
-    //     this instanceof Endboss ||
-    //     this instanceof Bottles ||
-    //     this instanceof Coins ||
-    //     this instanceof Chicken ||
-    //     this instanceof smallChicken) {
-    //   ctx.rect(
-    //     this.x + this.offset.left, this.y + this.offset.top,
-    //     this.width - this.offset.left - this.offset.right,
-    //     this.height - this.offset.top - this.offset.bottom
-    //   );
-    // }
     ctx.stroke();
   }
 
   /**
    * loads multiple images from the specified array of paths and caches them
    *
-   * @param {string[]} arr - array of image file paths
+   * @param {string[]} arr
    * @memberof DrawableObject
    */
   loadImages(arr) {

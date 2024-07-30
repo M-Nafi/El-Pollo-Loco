@@ -7,7 +7,7 @@ class Character extends MovableObject {
   hitted_sound = new Audio('audio/hitted.mp3');
   snoring_sound = new Audio('audio/snoring.mp3');
   gameover_sound = new Audio('audio/gameover.mp3');
-  lastMoveTime = new Date().getTime(); // erfassung letzte bewegung
+  lastMoveTime = new Date().getTime(); 
 
   IMAGES_WALKING = [
     'img/2_character_pepe/2_walk/W-21.png',

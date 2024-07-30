@@ -44,7 +44,7 @@ class Chicken extends MovableObject {
   /**
    * checks if the object is above the ground
    *
-   * @returns {boolean} true if above the ground, false otherwise
+   * @returns {boolean} 
    */
   isAboveGround() {
     return this.y < 348;

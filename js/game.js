@@ -68,7 +68,6 @@ function mobGameCntrlLeftHand() {
     e.preventDefault();
     keyboard.LEFT = false;
   });
-
   document.getElementById('move_right').addEventListener('touchstart', (e) => {
     e.preventDefault();
     keyboard.RIGHT = true;
@@ -89,17 +88,14 @@ function mobGameCntrlRightHand() {
     e.preventDefault();
     keyboard.SPACE = true; 
   });
-
   document.getElementById('jump').addEventListener('touchend', (e) => {
     e.preventDefault();
     keyboard.SPACE = false; 
   });
-
   document.getElementById('throw_bottle').addEventListener('touchstart', (e) => {
     e.preventDefault();
     keyboard.D = true; 
   });
-
   document.getElementById('throw_bottle').addEventListener('touchend', (e) => {
     e.preventDefault();
     keyboard.D = false; 

@@ -137,27 +137,40 @@ class World {
       if (this.character.isColliding(coin)) this.collectCoin(coin);
     });
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy) && !enemy.isDead && this.character.isFalling() ) {
+      if (this.character.isColliding(enemy) && !enemy.isDead && this.character.isFalling()) {
         this.handleEnemyCollision(enemy);
       }
     });
   }
 
   /**
-   * handles collisions between the character and an enemy
+   * handles collision between the character and an enemy
    *
-   * @param {Enemy} enemy
+   * @param {Enemy} enemy 
    * @memberof World
    */
   handleEnemyCollision(enemy) {
-    if (enemy instanceof Endboss || 
-        !(this.isCharacterAboveEnemy(this.character, enemy) ||
-        (this.character.isAboveGround() && this.character.acceleration >= 2) ) ) {
+    if (enemy instanceof Endboss) {
+      this.handleCollisionWithCharacterAndEndboss();
+    } else if (!(this.isCharacterAboveEnemy(this.character, enemy) ||
+        (this.character.isAboveGround() && this.character.acceleration >= 2))) {
       this.character.hit();
       this.statusBar.setPercentage(this.character.energy);
     } else if (this.isCharacterAboveEnemy(this.character, enemy)) {
       this.hitEnemyFromAbove(enemy);
     }
+  }
+
+  /**
+   * Handles character death by setting energy to 0 and pausing the game
+   *
+   * @memberof World
+   */
+  handleCollisionWithCharacterAndEndboss() {
+    this.character.energy = 0;
+    this.statusBar.setPercentage(this.character.energy);
+    this.character.hit();
+    this.game_sound.pause();
   }
 
   /**
@@ -190,7 +203,7 @@ class World {
    * @param {Character} character
    * @param {Enemy} enemy
    * @returns {boolean}
-   * 
+   *
    * @memberof World
    */
   isCharacterAboveEnemy(character, enemy) {
@@ -256,9 +269,7 @@ class World {
    * @memberof World
    */
   handleBottleCollision(bottle, enemy, index) {
-    if (enemy instanceof Endboss ||
-        enemy instanceof Chicken ||
-        enemy instanceof smallChicken) {
+    if (enemy instanceof Endboss || enemy instanceof Chicken || enemy instanceof smallChicken) {
       if (!bottle.hasHit) {
         bottle.playSplashAnimation();
         this.handleEndbossAfterCollision(enemy, index);
@@ -310,27 +321,22 @@ class World {
    * @memberof World
    */
   draw() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // hiermit wird das vorher eingefügte bild gelöscht, wichtig bei bewegungen
-
-    this.ctx.translate(this.camera_x, 0);
-    // die reihenfolge hier bestimmt auch was im vordergrund ist
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); 
+    this.ctx.translate(this.camera_x, 0);   
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
-
-    this.ctx.translate(-this.camera_x, 0); // back
+    this.ctx.translate(-this.camera_x, 0);
     this.addToMap(this.statusBar);
     this.addToMap(this.statusBarCoin);
     this.addToMap(this.statusBarBottle);
     this.addToMap(this.statusBarEndboss);
-    this.ctx.translate(this.camera_x, 0); // forwards
-
+    this.ctx.translate(this.camera_x, 0); 
     this.addObjectsToMap(this.level.bottles);
     this.addObjectsToMap(this.level.coins);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.throwableObjects);
-    this.ctx.translate(-this.camera_x, 0);
-    // draw() wird immer wieder aufgerufen
+    this.ctx.translate(-this.camera_x, 0);    
     let self = this;
     requestAnimationFrame(function () {
       self.draw();
@@ -356,8 +362,7 @@ class World {
    * @memberof World
    */
   addToMap(mo) {
-    if (mo.otherDirection) {
-      // checken ob character eine andere ricvhtung hat
+    if (mo.otherDirection) {      
       this.flipImage(mo);
     }
     mo.draw(this.ctx);
@@ -375,19 +380,19 @@ class World {
    */
   flipImage(mo) {
     this.ctx.save();
-    this.ctx.translate(mo.width, 0); // verursacht das verschieben des bildes. also umgekehrt
-    this.ctx.scale(-1, 1); //...gespiegelt einfügen
+    this.ctx.translate(mo.width, 0); 
+    this.ctx.scale(-1, 1); 
     mo.x = mo.x * -1;
   }
 
   /**
    * flips an image back to its original orientation
    *
-   * @param {MovableObject} mo - The object whose image to restore.
+   * @param {MovableObject} mo 
    * @memberof World
    */
   flipImageBack(mo) {
     mo.x = mo.x * -1;
-    this.ctx.restore(); // wieder rückgängig machen der spiegelung bei rechts laufen
+    this.ctx.restore(); 
   }
 }

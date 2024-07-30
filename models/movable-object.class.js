@@ -2,7 +2,7 @@ class MovableObject extends DrawableObject {
   speed = 0.15;
   otherDirection = false;
   speedY = 0;
-  acceleration = 2; // geschwindigkeit fallen. anpassen!
+  acceleration = 2; 
   energy = 100;
   lastHit = 0;
   hitCount = 0;
@@ -24,7 +24,7 @@ class MovableObject extends DrawableObject {
   /**
    * checks if the object is above the ground
    *
-   * @returns {boolean} true if above the ground, false otherwise
+   * @returns {boolean} 
    * @memberof MovableObject
    */
   isAboveGround() {
@@ -38,8 +38,8 @@ class MovableObject extends DrawableObject {
   /**
    * checks for collision with another object
    *
-   * @param {MovableObject} mo - the other object to check for collision
-   * @returns {boolean} true if colliding, false otherwise
+   * @param {MovableObject} mo 
+   * @returns {boolean} 
    * @memberof MovableObject
    */
   isColliding(mo) {
@@ -126,19 +126,19 @@ class MovableObject extends DrawableObject {
   /**
    * checks if the object has been recently hurt
    *
-   * @returns {boolean} true if the object is hurt, false otherwise
+   * @returns {boolean} 
    * @memberof MovableObject
    */
   isHurt() {
-    let timepassed = new Date().getTime() - this.lastHit; // differenz in ms
-    timepassed = timepassed / 1000; // differenz in sekunden
+    let timepassed = new Date().getTime() - this.lastHit; 
+    timepassed = timepassed / 1000; 
     return timepassed < 1;
   }
 
   /**
    * checks if the object is dead based on its energy level
    *
-   * @returns {boolean} true if the object is dead, false otherwise
+   * @returns {boolean} 
    * @memberof MovableObject
    */
   isDead() {
@@ -154,7 +154,7 @@ class MovableObject extends DrawableObject {
   /**
    * plays the animation based on the provided image paths
    *
-   * @param {string[]} images - array of image paths for the animation
+   * @param {string[]} images 
    * @memberof MovableObject
    */
   playAnimation(images) {
@@ -194,7 +194,7 @@ class MovableObject extends DrawableObject {
   /**
    * checks if the object is falling based on its vertical speed
    *
-   * @returns {boolean} true if the object is falling, false otherwise
+   * @returns {boolean} 
    * @memberof MovableObject
    */
   isFalling() {
@@ -204,7 +204,7 @@ class MovableObject extends DrawableObject {
   /**
    * registers and mutes an audio object if necessary
    *
-   * @param {HTMLAudioElement} audio - audio object to register and mute
+   * @param {HTMLAudioElement} audio
    * @memberof MovableObject
    */
   registerAndMuteAudio(audio) {
