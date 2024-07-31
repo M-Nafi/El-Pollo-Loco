@@ -25,8 +25,34 @@ canvas,
   display: block;
 }
 
+.relative-div {
+  position: relative;
+}
+
 .mobile-view-main {
-  display: none;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 1;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+}
+
+.move-Left,
+.move-Right,
+.jump,
+.bottle-throw {
+  width: 45px;
+  height: 45px;
+}
+
+.left-hand,
+.right-hand {
+  display: flex;
+  padding-left: 16px;
+  padding-right: 16px;
+  gap: 16px;
 }
 
 .start-screen-main {
@@ -41,7 +67,7 @@ canvas,
 }
 
 .game-over-imgs {
-  position: absolute;
+  position: relative;
 }
 
 .start-screen,
@@ -57,13 +83,12 @@ canvas,
   position: fixed;
   z-index: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
 .start-btn {
   width: 50px;
-  transition: width 0.3s;
   padding: 10px;
   cursor: pointer;
   filter: grayscale(1);
@@ -118,7 +143,7 @@ h2 {
   justify-content: space-around;
   margin-top: 5px;
   border-radius: 16px;
-  box-shadow: 4px 4px 10px 0 rgb(27, 27, 27);
+  box-shadow: 0px 0px 10px 0 rgb(27, 27, 27);
   bottom: 0;
 }
 
@@ -152,7 +177,6 @@ h2 {
   padding-left: 16px;
   padding-right: 16px;
   cursor: pointer;
-  transition: width 0.3s;
   filter: grayscale(1);
 }
 
@@ -167,6 +191,8 @@ h2 {
 
 a {
   text-decoration: none !important;
+  font-size: 16px;
+  text-shadow: 4px 2px 2px rgba(0, 0, 0, 0.5);
   color: white;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -178,7 +204,21 @@ a:hover {
 }
 
 p {
-  margin-top: 5px;
+  margin: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.privacy {
+  display: flex;
+  border-radius: 16px;
+  box-shadow: 0px 1px 3px 0px rgb(78, 78, 78);
+}
+
+@media (min-width: 1025px) {
+  .mobile-view-main {
+    display: none;
+  }
 }
 
 /* smartphones ---------------*/
@@ -268,24 +308,8 @@ p {
     gap: 16px;
   }
 
-  .restart-game-part {
-    border: none;
-    position: absolute;
-    height: 100vh;
-    display: flex;
-    align-content: flex-end;
-    flex-direction: row;
-    box-shadow: none;
-    height: 370px;
-  }
-
-  .restart-icon {
-    filter: none;
-    width: 50px;
-  }
-
-  .restart-icon:hover {
-    width: 50px;
+  .privacy {
+    margin: 0px;
   }
 
   .canvas-relative {
@@ -301,7 +325,7 @@ p {
     display: flex;
     position: absolute;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
 
   p {
@@ -309,6 +333,8 @@ p {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
       Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
       sans-serif;
+    margin: 5px;
+    margin-top: 0px;
   }
 
   h2 {
@@ -339,11 +365,5 @@ p {
 
   .turndevice {
     width: 100px;
-  }
-}
-
-@media (max-width: 520px) {
-  h1 {
-    font-size: 25px;
   }
 }

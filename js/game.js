@@ -14,11 +14,13 @@ function handleGameOver() {
  * initializes world and starts the game
  */
 function startGame() {
+  gameOverImage2 = document.getElementById('game_over_img_2');
   canvas = document.getElementById('canvas');
   startScreen = document.getElementById('start_screen');
   mainFont = document.getElementById('main_font');
   if (canvas && startScreen) {
     startLevel();
+    gameOverImage2.classList.add('d-none');
     world = new World(canvas, keyboard);
     startScreen.classList.add('d-none');
     canvas.classList.remove('d-none');
@@ -31,20 +33,21 @@ function startGame() {
 /**
  * restarts the game and show relevant elements
  */
-function restartGame() {
-  let canvas = document.querySelector('canvas');
-  let gameOverImage2 = document.getElementById('game_over_img_2');
-  let gameIntroducing = document.getElementById('game_introducing');
-  let restartGame = document.getElementById('restart_game');
+// function restartGame() {  
+//   // let canvas = document.querySelector('canvas');
+//   let gameOverImage2 = document.getElementById('game_over_img_2');
+//   // let gameIntroducing = document.getElementById('game_introducing');
+//   let restartGame = document.getElementById('restart_game');
 
-  canvas.style.display = '';
-  gameOverImage2.classList.add('d-none');
-  gameIntroducing.style.display = '';
-  restartGame.classList.add('d-none');
-  location.reload();
-  mobGameCntrlLeftHand();
-  mobGameCntrlRightHand();
-}
+//   // canvas.style.display = '';
+//   gameOverImage2.classList.add('d-none');
+//   // gameIntroducing.style.display = '';
+//   restartGame.classList.add('d-none');
+//   // location.reload();
+//   // mobGameCntrlLeftHand();
+//   // mobGameCntrlRightHand();
+//   startGame();
+// }
 
 /**
  * 
@@ -55,7 +58,7 @@ function definitionOfControlIcons() {
 }
 
 /**
- * sets up mobile game controls
+ * sets up mobile game controls left hand side
  */
 function mobGameCntrlLeftHand() {
   definitionOfControlIcons();
@@ -79,7 +82,7 @@ function mobGameCntrlLeftHand() {
 }
 
 /**
- * sets up mobile game controls
+ * sets up mobile game controls right hand side
  */
 function mobGameCntrlRightHand() {
   definitionOfControlIcons();
