@@ -179,6 +179,9 @@ class Endboss extends MovableObject {
     this.gameOver = true;
     this.hideInitialElements();
     this.startEndbossDeathSequence();
+    setTimeout(() => {
+      location.reload();
+    }, 8000); 
   }
 
   /**

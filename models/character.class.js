@@ -230,6 +230,9 @@ class Character extends MovableObject {
     this.hideGameElements();
     this.showGameOverImages();
     this.handleGameOverSound();
+    setTimeout(() => {
+      location.reload();
+    }, 8000);    
   }
 
   /**
@@ -257,8 +260,8 @@ class Character extends MovableObject {
     setTimeout(() => {
       document.getElementById('game_over_img_2').classList.remove('d-none');
       document.getElementById('game_over_img_1').style.display = 'none';
-    }, 5000);
-  }
+    }, 5000);        
+  }  
 
   /**
    * plays and then stops the gameover sound
