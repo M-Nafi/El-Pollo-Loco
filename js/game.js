@@ -33,21 +33,21 @@ function startGame() {
 /**
  * restarts the game and show relevant elements
  */
-// function restartGame() {  
-//   // let canvas = document.querySelector('canvas');
-//   let gameOverImage2 = document.getElementById('game_over_img_2');
-//   // let gameIntroducing = document.getElementById('game_introducing');
-//   let restartGame = document.getElementById('restart_game');
+function restartGame() {  
+  // let canvas = document.querySelector('canvas');
+  let gameOverImage2 = document.getElementById('game_over_img_2');
+  // let gameIntroducing = document.getElementById('game_introducing');
+  let restartGame = document.getElementById('restart_game');
 
-//   // canvas.style.display = '';
-//   gameOverImage2.classList.add('d-none');
-//   // gameIntroducing.style.display = '';
-//   restartGame.classList.add('d-none');
-//   // location.reload();
-//   // mobGameCntrlLeftHand();
-//   // mobGameCntrlRightHand();
-//   startGame();
-// }
+  // canvas.style.display = '';
+  gameOverImage2.classList.add('d-none');
+  // gameIntroducing.style.display = '';
+  restartGame.classList.add('d-none');
+  // location.reload();
+  // mobGameCntrlLeftHand();
+  // mobGameCntrlRightHand();
+  startGame();
+}
 
 /**
  * 

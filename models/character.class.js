@@ -7,7 +7,9 @@ class Character extends MovableObject {
   hitted_sound = new Audio('audio/hitted.mp3');
   snoring_sound = new Audio('audio/snoring.mp3');
   gameover_sound = new Audio('audio/gameover.mp3');
-  lastMoveTime = new Date().getTime(); 
+  lastMoveTime = new Date().getTime();
+  lastIdleTime = new Date().getTime();
+  longIdle = false;
 
   IMAGES_WALKING = [
     'img/2_character_pepe/2_walk/W-21.png',
@@ -59,6 +61,19 @@ class Character extends MovableObject {
     'img/2_character_pepe/1_idle/long_idle/I-20.png',
   ];
 
+  IMAGES_IDLE = [
+    'img/2_character_pepe/1_idle/idle/I-1.png',
+    'img/2_character_pepe/1_idle/idle/I-2.png',
+    'img/2_character_pepe/1_idle/idle/I-3.png',
+    'img/2_character_pepe/1_idle/idle/I-4.png',
+    'img/2_character_pepe/1_idle/idle/I-5.png',
+    'img/2_character_pepe/1_idle/idle/I-6.png',
+    'img/2_character_pepe/1_idle/idle/I-7.png',
+    'img/2_character_pepe/1_idle/idle/I-8.png',
+    'img/2_character_pepe/1_idle/idle/I-9.png',
+    'img/2_character_pepe/1_idle/idle/I-10.png',
+  ];
+
   IMAGES_GAMEOVER = [
     'img/9_intro_outro_screens/game_over/oh no you lost!.png',
     'img/9_intro_outro_screens/game_over/game over!.png',
@@ -72,9 +87,10 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_LONGIDLE);
     this.loadImages(this.IMAGES_GAMEOVER);
+    this.loadImages(this.IMAGES_IDLE);
     this.animate();
     this.applyGravity();
-    this.longIdle();
+    this.manageIdleStates();
     this.registerAndMuteAudio(this.walking_sound);
     this.registerAndMuteAudio(this.jumping_sound);
     this.registerAndMuteAudio(this.hitted_sound);
@@ -84,8 +100,7 @@ class Character extends MovableObject {
 
   /**
    * starts animation loops for movement, jumping, camera updates, and character animations
-   * 
-   * @memberOf Character
+   * @memberof Character
    */
   animate() {
     setInterval(() => {
@@ -95,34 +110,45 @@ class Character extends MovableObject {
     }, 1000 / 60);
     setInterval(() => {
       this.updateCharacterAnimations();
-    }, 50);
+    }, 100);
   }
 
   /**
    * handles character movement based on using keyboard and plays the walking sound
-   * 
-   * @memberOf Character
+   *
+   * @memberof Character
    */
   handleCharacterMove() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
       this.otherDirection = false;
-      if (!this.isAboveGround()) this.walking_sound.play();
-      this.lastMoveTime = new Date().getTime();
+      if (!this.isAboveGround()) this.monitoringCharactersLastAction();
     } else if (this.world.keyboard.LEFT && this.x > -500) {
       this.moveLeft();
       this.otherDirection = true;
-      if (!this.isAboveGround()) this.walking_sound.play();
-      this.lastMoveTime = new Date().getTime();
+      if (!this.isAboveGround()) this.monitoringCharactersLastAction();
     } else {
       this.walking_sound.pause();
     }
   }
 
   /**
+   * updates the time of the last movement and idle state of the character
+   * and plays the walking sound
+   *
+   * @memberof Character
+   */
+  monitoringCharactersLastAction() {
+    this.lastMoveTime = new Date().getTime();
+    this.lastIdleTime = new Date().getTime();
+    this.longIdle = false;
+    this.walking_sound.play();
+  }
+
+  /**
    * handles character jumping based on using keyboard and plays the jumping sound
-   * 
-   * @memberOf Character
+   *
+   * @memberof Character
    */
   handleCharacterJump() {
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
@@ -130,13 +156,14 @@ class Character extends MovableObject {
       this.walking_sound.pause();
       this.jumping_sound.play();
       this.lastMoveTime = new Date().getTime();
+      this.lastIdleTime = new Date().getTime();
+      this.longIdle = false;
     }
   }
 
   /**
    * updates the camera position based on the character's x position
-   * 
-   * @memberOf Character
+   * @memberof Character
    */
   updateCamera() {
     this.world.camera_x = -this.x + 75;
@@ -144,8 +171,8 @@ class Character extends MovableObject {
 
   /**
    * updates character animations based on its current state if dead, hurt, jumping or walking
-   * 
-   * @memberOf Character
+   *
+   * @memberof Character
    */
   updateCharacterAnimations() {
     if (this.isDead()) {
@@ -156,23 +183,41 @@ class Character extends MovableObject {
     } else if (this.isAboveGround()) {
       this.playAnimation(this.IMAGES_JUMPING);
     } else {
-      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        this.playAnimation(this.IMAGES_WALKING);
-      }
+      this.updateWalkingOrIdleAnimation();
     }
   }
 
   /**
-   * manages the long idle animation and plays the snoring sound if the character is idle for 3 sekonds
+   * updates character animation based on its movement or idle state   
    * 
-   * @memberOf Character
+   * @memberof Character
    */
-  longIdle() {
+  updateWalkingOrIdleAnimation() {
+    if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+      this.playAnimation(this.IMAGES_WALKING);
+    } else if (this.longIdle) {
+      this.playAnimation(this.IMAGES_LONGIDLE);
+    } else {
+      this.playAnimation(this.IMAGES_IDLE);
+    }
+  }
+
+  /**
+   * manages the idle and long idle animations and plays the snoring sound if the character is idle for 10 seconds
+   *
+   * @memberof Character
+   */
+  manageIdleStates() {
     setInterval(() => {
       let currentTime = new Date().getTime();
-      if (currentTime - this.lastMoveTime > 3000 && !this.isDead() && !gameOver) {
-        this.playLongIdleAnimation();
+      if (this.isAboveGround()) {
+        this.lastIdleTime = currentTime;
+      }
+      if (this.shouldTriggerLongIdleWarning()) {
+        this.longIdle = true;
         this.snoring_sound.play();
+      } else if (this.shouldTriggerIdleWarning()) {
+        this.longIdle = false;
       } else {
         this.snoring_sound.pause();
       }
@@ -180,39 +225,48 @@ class Character extends MovableObject {
   }
 
   /**
-   * plays the long idle animation when the character is idle for an extended period
-   * 
-   * @memberOf Character
+   * determines whether a long idle warning should be triggered based on time elapsed
+   *
+   * @memberof Character
    */
-  playLongIdleAnimation() {
-    let longIdleInterval = setInterval(() => {
-      if (this.anyKeyPressed()) {
-        clearInterval(longIdleInterval);
-        this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
-        this.snoring_sound.pause();
-        this.lastMoveTime = new Date().getTime();       
-      }
-      this.playAnimation(this.IMAGES_LONGIDLE);
-    }, 1000);
+  shouldTriggerLongIdleWarning() {
+    let currentTime = new Date().getTime();
+    return (
+      currentTime - this.lastMoveTime > 3000 &&
+      currentTime - this.lastIdleTime > 10000 &&
+      !this.isDead() &&
+      !gameOver
+    );
   }
 
   /**
-   * Checks if any of the specified keys (LEFT, RIGHT, SPACE, D) is pressed.
-   * 
-   * @returns {boolean}
-   * @memberOf Character
+   * determines whether an idle warning should be triggered based on time elapsed
+   *
+   * @memberof Character
+   */
+  shouldTriggerIdleWarning() {
+    let currentTime = new Date().getTime();
+    return (
+      currentTime - this.lastMoveTime > 3000 && !this.isDead() && !gameOver
+    );
+  }
+
+  /**
+   * Checks if any of the specified keys (LEFT, RIGHT, SPACE, D) is pressed
+   *
+   * @memberof Character
    */
   anyKeyPressed() {
-    return this.world.keyboard.LEFT ||
-           this.world.keyboard.RIGHT ||
-           this.world.keyboard.SPACE ||
-           this.world.keyboard.D;
+    return (
+      this.world.keyboard.LEFT ||
+      this.world.keyboard.RIGHT ||
+      this.world.keyboard.SPACE ||
+      this.world.keyboard.D
+    );
   }
 
   /**
    * defines the offset values for the object
-   *
-   * @memberof Character
    */
   offset = {
     top: 120,
@@ -223,7 +277,8 @@ class Character extends MovableObject {
 
   /**
    * handles gameover sequence including hiding game elements and displaying gameover images
-   * @memberOf Character
+   *
+   * @memberof Character
    */
   handlePepeIsDeath() {
     gameOver = true;
@@ -232,20 +287,20 @@ class Character extends MovableObject {
     this.handleGameOverSound();
     // setTimeout(() => {
     //   location.reload();
-    // }, 8000);    
+    // }, 8000);
   }
 
   /**
    * hides the game elements and displays the initial gameover screen elements
-   * 
-   * @memberOf Character
+   *
+   * @memberof Character
    */
   hideGameElements() {
     document.getElementById('mobile_view').style.display = 'none';
     setTimeout(() => {
       document.querySelector('canvas').style.display = 'none';
-      document.getElementById('game_introducing').style.display = 'none';   
-      document.getElementById('restart_game').classList.remove('d-none');  
+      document.getElementById('game_introducing').style.display = 'none';
+      document.getElementById('restart_game').classList.remove('d-none');
       document.getElementById('game_over_img_1').classList.remove('d-none');
       document.getElementById('main_font').style.display = 'none';
     }, 3000);
@@ -253,20 +308,20 @@ class Character extends MovableObject {
 
   /**
    * displays gameover image and hides the first one
-   * 
-   * @memberOf Character
+   *
+   * @memberof Character
    */
   showGameOverImages() {
     setTimeout(() => {
       document.getElementById('game_over_img_2').classList.remove('d-none');
       document.getElementById('game_over_img_1').style.display = 'none';
-    }, 5000);        
-  }  
+    }, 5000);
+  }
 
   /**
    * plays and then stops the gameover sound
-   * 
-   * @memberOf Character
+   *
+   * @memberof Character
    */
   handleGameOverSound() {
     this.gameover_sound.play();
