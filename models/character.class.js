@@ -284,11 +284,10 @@ class Character extends MovableObject {
     gameOver = true;
     this.hideGameElements();
     this.showGameOverImages();
-    this.handleGameOverSound();
-    // setTimeout(() => {
-    //   location.reload();
-    // }, 8000);
+    this.handleGameOverSound();  
   }
+
+  
 
   /**
    * hides the game elements and displays the initial gameover screen elements
@@ -301,6 +300,7 @@ class Character extends MovableObject {
       document.querySelector('canvas').style.display = 'none';
       document.getElementById('game_introducing').style.display = 'none';
       document.getElementById('restart_game').classList.remove('d-none');
+      document.getElementById('start_btn_3').classList.remove('d-none');
       document.getElementById('game_over_img_1').classList.remove('d-none');
       document.getElementById('main_font').style.display = 'none';
     }, 3000);

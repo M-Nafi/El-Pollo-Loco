@@ -31,7 +31,34 @@ function startGame() {
 }
 
 /**
- * resets game state and displays relevant elements 
+ * restarts the game by hiding game over images. stopping all active intervals
+ * resetting canvas and mobile controls, and then starting the game again
+ */
+function restartGame() {
+  document.getElementById('game_over_img_1').classList.add('d-none');
+  document.getElementById('game_over_img_2').classList.add('d-none');
+  document.getElementById('win_img_2').classList.add('d-none');
+  stopGame();
+  canvas = document.getElementById('canvas');
+  document.getElementById('canvas').style.display = '';
+  document.getElementById('mobile_view').style.display = '';
+  document.getElementById('restart_game').classList.add('d-none');
+  mobGameCntrlLeftHand();
+  mobGameCntrlRightHand();
+  startGame();
+}
+
+/**
+ * stops all active intervals by clearing interval ids
+ */
+function stopGame() {
+  for (let i = 1; i < 9999; i++) {
+    window.clearInterval(i);
+  }
+}
+
+/**
+ * resets game state and displays relevant elements
  * reloads the page to reset the game state
  */
 function backToMenu() {

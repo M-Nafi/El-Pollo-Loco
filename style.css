@@ -227,13 +227,16 @@ p {
   body,
   .start-screen,
   .start-orientation,
-  .game-over-img,
-  .win-img,
+  .game-over-img,  
   .game-introducing,
   .restart-game-part,
   .mobile-view-main,
   .main-font-class {
     width: 100%;
+  }
+
+  .win-img {
+    width: 90vw;
   }
 
   .main-font-class {
@@ -289,7 +292,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    padding-bottom: 16px;
+    padding-bottom: 7px;
   }
 
   .mobile-view-main {
