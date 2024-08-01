@@ -73,7 +73,7 @@ class Endboss extends MovableObject {
    * @memberof Endboss
    */
   increaseSpeed() {
-    this.speed *= 2.1;
+    this.speed *= 2.1;    
   }
 
   /**
@@ -178,10 +178,7 @@ class Endboss extends MovableObject {
   handleEndbossIsDeath() {
     this.gameOver = true;
     this.hideInitialElements();
-    this.startEndbossDeathSequence();
-    // setTimeout(() => {
-    //   location.reload();
-    // }, 10000); 
+    this.startEndbossDeathSequence();   
   }
 
   /**
@@ -209,6 +206,7 @@ class Endboss extends MovableObject {
       document.querySelector('canvas').style.display = 'none';
       document.getElementById('game_introducing').style.display = 'none';      
       winImage2.classList.remove('d-none');
+      document.getElementById('restart_game').classList.remove('d-none');
       this.win_sound.play();
     }, 3000);
   }

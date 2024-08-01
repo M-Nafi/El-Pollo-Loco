@@ -33,20 +33,16 @@ function startGame() {
 /**
  * restarts the game and show relevant elements
  */
-function restartGame() {  
-  // let canvas = document.querySelector('canvas');
+function backToMenu() {  
+  let canvas = document.getElementById('canvas');
   let gameOverImage2 = document.getElementById('game_over_img_2');
-  // let gameIntroducing = document.getElementById('game_introducing');
+  let gameIntroducing = document.getElementById('game_introducing');
   let restartGame = document.getElementById('restart_game');
-
-  // canvas.style.display = '';
+  canvas.style.display = '';
   gameOverImage2.classList.add('d-none');
-  // gameIntroducing.style.display = '';
+  gameIntroducing.style.display = '';
   restartGame.classList.add('d-none');
-  // location.reload();
-  // mobGameCntrlLeftHand();
-  // mobGameCntrlRightHand();
-  startGame();
+  location.reload(); 
 }
 
 /**
