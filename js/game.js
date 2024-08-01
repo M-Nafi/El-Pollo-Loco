@@ -25,28 +25,25 @@ function startGame() {
     startScreen.classList.add('d-none');
     canvas.classList.remove('d-none');
     mainFont.classList.remove('d-none');
-    mobGameCntrlLeftHand();   
+    mobGameCntrlLeftHand();
     mobGameCntrlRightHand();
   }
 }
 
 /**
- * restarts the game and show relevant elements
+ * resets game state and displays relevant elements 
+ * reloads the page to reset the game state
  */
-function backToMenu() {  
-  let canvas = document.getElementById('canvas');
-  let gameOverImage2 = document.getElementById('game_over_img_2');
-  let gameIntroducing = document.getElementById('game_introducing');
-  let restartGame = document.getElementById('restart_game');
-  canvas.style.display = '';
-  gameOverImage2.classList.add('d-none');
-  gameIntroducing.style.display = '';
-  restartGame.classList.add('d-none');
-  location.reload(); 
+function backToMenu() {
+  document.getElementById('canvas').style.display = '';
+  document.getElementById('game_over_img_2').classList.add('d-none');
+  document.getElementById('game_introducing').style.display = '';
+  document.getElementById('restart_game').classList.add('d-none');
+  location.reload();
 }
 
 /**
- * 
+ * displays mobile control icons by removing the d-none class
  */
 function definitionOfControlIcons() {
   let controlIcons = document.getElementById('mobile_view');
@@ -82,29 +79,31 @@ function mobGameCntrlLeftHand() {
  */
 function mobGameCntrlRightHand() {
   definitionOfControlIcons();
-  
+
   document.getElementById('jump').addEventListener('touchstart', (e) => {
     e.preventDefault();
-    keyboard.SPACE = true; 
+    keyboard.SPACE = true;
   });
   document.getElementById('jump').addEventListener('touchend', (e) => {
     e.preventDefault();
-    keyboard.SPACE = false; 
+    keyboard.SPACE = false;
   });
-  document.getElementById('throw_bottle').addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    keyboard.D = true; 
-  });
+  document
+    .getElementById('throw_bottle')
+    .addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      keyboard.D = true;
+    });
   document.getElementById('throw_bottle').addEventListener('touchend', (e) => {
     e.preventDefault();
-    keyboard.D = false; 
+    keyboard.D = false;
   });
 }
 
 /**
  * sets up keyboard controls for desktop
  */
-window.addEventListener('keydown', (e) => {  
+window.addEventListener('keydown', (e) => {
   if (e.keyCode == 39) {
     keyboard.RIGHT = true;
   }
@@ -140,22 +139,24 @@ window.addEventListener('keyup', (e) => {
 function setupSoundControl() {
   let soundOffIcon = document.getElementById('sound_off');
   let soundOnIcon = document.getElementById('sound_on');
-  let isMuted = true; 
+  let isMuted = true;
   let allAudios = [];
-  let registerAudio = audio => {
+  let registerAudio = (audio) => {
     allAudios.push(audio);
     audio.muted = isMuted;
   };
   let toggleMute = () => {
     isMuted = !isMuted;
-    allAudios.forEach(audio => audio.muted = isMuted);
+    allAudios.forEach((audio) => (audio.muted = isMuted));
     soundOffIcon.classList.toggle('d-none', !isMuted);
     soundOnIcon.classList.toggle('d-none', isMuted);
   };
 
-  [soundOffIcon, soundOnIcon].forEach(icon => icon.addEventListener('click', toggleMute));
+  [soundOffIcon, soundOnIcon].forEach((icon) =>
+    icon.addEventListener('click', toggleMute)
+  );
   window.registerAudio = registerAudio;
-  window.isMuted = () => isMuted;  
+  window.isMuted = () => isMuted;
   soundOffIcon.classList.remove('d-none');
   soundOnIcon.classList.add('d-none');
 }
