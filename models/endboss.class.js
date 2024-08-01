@@ -73,7 +73,7 @@ class Endboss extends MovableObject {
    * @memberof Endboss
    */
   increaseSpeed() {
-    this.speed *= 1;    
+    this.speed *= 2.1;
   }
 
   /**
